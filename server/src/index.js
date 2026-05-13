@@ -5,6 +5,8 @@ import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import bcrypt from 'bcryptjs'
+import { PrismaClient } from '@prisma/client'
 import announcementsRouter from './routes/announcements.js'
 import suggestionsRouter   from './routes/suggestions.js'
 import knowledgeRouter     from './routes/knowledge.js'
@@ -13,6 +15,19 @@ import usersRouter         from './routes/users.js'
 import spotlightsRouter    from './routes/spotlights.js'
 import uploadRouter        from './routes/upload.js'
 import errorHandler        from './middleware/errorHandler.js'
+
+const prisma = new PrismaClient()
+async function ensureAdmin() {
+  const exists = await prisma.user.findUnique({ where: { email: 'admin@algogroup.com' } })
+  if (!exists) {
+    const hash = await bcrypt.hash('Admin@1234', 10)
+    await prisma.user.create({
+      data: { email: 'admin@algogroup.com', name: 'ALGO Admin', password: hash, role: 'admin', department: 'Management' }
+    })
+    console.log('Admin user created automatically')
+  }
+}
+ensureAdmin()
 
 dotenv.config()
 
