@@ -21,17 +21,21 @@ function NavItem({ to, label, Icon, onClose }) {
       to={to}
       onClick={onClose}
       className={({ isActive }) =>
-        `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
-         transition-colors duration-150
+        `relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+         transition-all duration-200
          ${isActive
-           ? 'bg-brand text-ink-on'
-           : 'text-ink-muted hover:text-ink hover:bg-card'
+           ? 'nav-active'
+           : 'text-ink-muted hover:text-ink hover:bg-white/5'
          }`
       }
     >
       {({ isActive }) => (
         <>
-          <Icon size={17} className={isActive ? 'text-ink-on' : ''} />
+          {isActive && (
+            <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-brand
+                             shadow-[0_0_8px_rgba(0,200,83,0.8)]" />
+          )}
+          <Icon size={16} className={isActive ? 'text-brand' : ''} strokeWidth={isActive ? 2.5 : 2} />
           {label}
         </>
       )}
@@ -49,42 +53,65 @@ function SidebarShell({ onClose }) {
   }
 
   return (
-    <aside className="flex flex-col w-60 h-full bg-surface border-r border-edge">
-      {/* Header */}
+    <aside className="flex flex-col w-60 h-full glass-sidebar">
+      {/* Logo */}
       <div className="px-5 py-5 border-b border-edge flex items-center justify-between flex-shrink-0">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-md bg-brand flex items-center justify-center flex-shrink-0">
-            <span className="text-ink-on font-bold text-sm">A</span>
+        <div className="flex items-center gap-3">
+          <div className="relative w-8 h-8 flex-shrink-0">
+            <div className="absolute inset-0 rounded-lg bg-brand/20 blur-sm" />
+            <div className="relative w-8 h-8 rounded-lg bg-brand flex items-center justify-center
+                            shadow-[0_0_12px_rgba(0,200,83,0.5)]">
+              <span className="text-white font-bold text-sm tracking-tight">A</span>
+            </div>
           </div>
           <div>
-            <p className="text-ink font-semibold text-sm leading-tight">ALGO Group</p>
-            <p className="text-ink-subtle text-xs">Internal Portal</p>
+            <p className="text-ink font-semibold text-sm leading-tight tracking-tight">ALGO Group</p>
+            <p className="text-ink-subtle text-[11px] tracking-wide">Internal Portal</p>
           </div>
         </div>
         {onClose && (
-          <button onClick={onClose} className="text-ink-muted hover:text-ink transition-colors">
-            <X size={17} />
+          <button onClick={onClose} className="text-ink-muted hover:text-ink transition-colors p-1 rounded-md hover:bg-white/5">
+            <X size={16} />
           </button>
         )}
       </div>
 
+      {/* Nav label */}
+      <div className="px-4 pt-4 pb-1">
+        <span className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.12em]">Navigation</span>
+      </div>
+
       {/* Nav */}
-      <nav className="flex-1 px-3 py-4 flex flex-col gap-1 overflow-y-auto">
+      <nav className="flex-1 px-3 py-2 flex flex-col gap-0.5 overflow-y-auto">
         {navItems.map(({ to, label, icon: Icon }) => (
           <NavItem key={to} to={to} label={label} Icon={Icon} onClose={onClose} />
         ))}
 
         {user?.role === 'admin' && (
           <>
-            <div className="mx-3 my-2 h-px bg-edge" />
+            <div className="mx-1 my-3 divider-glow" />
+            <div className="px-1 pb-1">
+              <span className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.12em]">Admin</span>
+            </div>
             <NavLink
               to="/admin"
               onClick={onClose}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
-                         text-ink-muted hover:text-ink hover:bg-card transition-colors duration-150"
+              className={({ isActive }) =>
+                `relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                 transition-all duration-200
+                 ${isActive ? 'nav-active' : 'text-ink-muted hover:text-ink hover:bg-white/5'}`
+              }
             >
-              <ShieldCheck size={17} />
-              Admin Panel
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-brand
+                                     shadow-[0_0_8px_rgba(0,200,83,0.8)]" />
+                  )}
+                  <ShieldCheck size={16} className={isActive ? 'text-brand' : ''} />
+                  Admin Panel
+                </>
+              )}
             </NavLink>
           </>
         )}
@@ -92,22 +119,26 @@ function SidebarShell({ onClose }) {
 
       {/* User footer */}
       <div className="px-3 py-3 border-t border-edge flex-shrink-0">
-        <div className="flex items-center gap-2.5 px-2 py-2 rounded-lg">
-          <div className="w-7 h-7 rounded-full bg-brand flex items-center justify-center flex-shrink-0">
-            <span className="text-ink-on text-xs font-semibold">
-              {user?.name?.[0]?.toUpperCase() || 'U'}
-            </span>
+        <div className="flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-white/5 transition-colors group">
+          <div className="relative w-7 h-7 flex-shrink-0">
+            <div className="absolute inset-0 rounded-full bg-brand/30 blur-sm" />
+            <div className="relative w-7 h-7 rounded-full bg-brand/20 border border-brand/30
+                            flex items-center justify-center">
+              <span className="text-brand text-xs font-semibold">
+                {user?.name?.[0]?.toUpperCase() || 'U'}
+              </span>
+            </div>
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-ink text-xs font-medium truncate">{user?.name || 'User'}</p>
-            <p className="text-ink-subtle text-xs truncate">{user?.department || user?.role}</p>
+            <p className="text-ink-subtle text-[11px] truncate">{user?.department || user?.role}</p>
           </div>
           <button
             onClick={handleLogout}
             title="Sign out"
-            className="text-ink-subtle hover:text-danger transition-colors p-1 rounded"
+            className="text-ink-subtle hover:text-danger transition-colors p-1 rounded opacity-0 group-hover:opacity-100"
           >
-            <LogOut size={14} />
+            <LogOut size={13} />
           </button>
         </div>
       </div>
@@ -123,7 +154,7 @@ function MobileSidebar({ open, onClose }) {
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="fixed inset-0 bg-black/60 z-40 lg:hidden"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 lg:hidden"
             onClick={onClose}
           />
           <motion.div

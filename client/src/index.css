@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +8,6 @@
    ALGO Group Portal — Design Tokens
    ============================================================ */
 
-/* Color primitives */
 :root {
   --brand-500: #006000;
   --brand-400: #1d8a3a;
@@ -17,7 +16,6 @@
   --brand-950: #042510;
 
   --neutral-0:   #ffffff;
-  --neutral-25:  #fafafa;
   --neutral-50:  #f8f8f8;
   --neutral-100: #f3f3f3;
   --neutral-200: #e5e5e5;
@@ -27,22 +25,13 @@
   --neutral-700: #4a4a4a;
   --neutral-900: #111111;
 
-  --dark-0:   #0f0f0f;
-  --dark-50:  #111111;
-  --dark-100: #161616;
-  --dark-200: #1a1a1a;
-  --dark-300: #1e1e1e;
-  --dark-400: #232323;
-  --dark-500: #2a2a2a;
-  --dark-600: #333333;
-
   --green-500: #10b981;
   --amber-500: #f59e0b;
   --red-500:   #ef4444;
   --blue-500:  #3b82f6;
 }
 
-/* Semantic tokens — light (default) */
+/* Light mode */
 :root {
   --bg:            var(--neutral-50);
   --surface:       var(--neutral-0);
@@ -64,14 +53,14 @@
   --danger:  var(--red-500);
   --info:    var(--blue-500);
 
-  --shadow-sm:    0 1px 2px rgba(17,17,17,.04), 0 1px 1px rgba(17,17,17,.03);
+  --shadow-sm:    0 1px 2px rgba(17,17,17,.04);
   --shadow-md:    0 4px 12px rgba(17,17,17,.06), 0 2px 4px rgba(17,17,17,.04);
   --shadow-lg:    0 12px 32px rgba(17,17,17,.08), 0 4px 8px rgba(17,17,17,.05);
   --shadow-focus: 0 0 0 3px rgba(0,96,0,.25);
+  --glow-brand:   none;
+  --glow-brand-sm: none;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-
   --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-fast: 150ms;
@@ -79,35 +68,50 @@
   --dur-slow: 320ms;
 }
 
-/* Semantic tokens — dark */
+/* Dark mode — premium redesign */
 .dark {
-  --bg:            var(--dark-50);
-  --surface:       var(--dark-200);
-  --surface-2:     var(--dark-300);
-  --border:        var(--dark-500);
-  --border-strong: var(--dark-600);
+  /* Base surfaces */
+  --bg:        #07090a;
+  --surface:   rgba(10, 15, 11, 0.88);
+  --surface-2: rgba(255, 255, 255, 0.04);
+  --border:        rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.13);
 
-  --fg:           #f1f1f1;
-  --fg-muted:     #888888;
-  --fg-subtle:    #6b6b6b;
+  /* Text — slightly warm white */
+  --fg:           #e2ebe2;
+  --fg-muted:     rgba(226, 235, 226, 0.50);
+  --fg-subtle:    rgba(226, 235, 226, 0.28);
   --fg-on-accent: #ffffff;
 
-  --accent:       var(--brand-500);
-  --accent-hover: var(--brand-400);
-  --accent-soft:  rgba(0, 96, 0, 0.12);
+  /* Brand — brighter emerald for glow */
+  --accent:      #00c853;
+  --accent-hover: #00e676;
+  --accent-soft:  rgba(0, 200, 83, 0.10);
 
-  --shadow-sm:    0 1px 2px rgba(0,0,0,.4);
-  --shadow-md:    0 4px 12px rgba(0,0,0,.45), 0 2px 4px rgba(0,0,0,.3);
-  --shadow-lg:    0 12px 32px rgba(0,0,0,.55), 0 4px 8px rgba(0,0,0,.35);
-  --shadow-focus: 0 0 0 3px rgba(0,96,0,.35);
+  /* Semantic */
+  --success: #00c853;
+  --warning: #fbbf24;
+  --danger:  #f87171;
+  --info:    #60a5fa;
+
+  /* Layered shadows with green ambient */
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.55);
+  --shadow-md:    0 4px 24px rgba(0,0,0,0.50), 0 0 0 1px rgba(255,255,255,0.05);
+  --shadow-lg:    0 8px 48px rgba(0,0,0,0.60), 0 0 80px rgba(0,200,83,0.05), 0 0 0 1px rgba(255,255,255,0.06);
+  --shadow-focus: 0 0 0 3px rgba(0, 200, 83, 0.30);
+  --glow-brand:    0 0 40px rgba(0,200,83,0.18), 0 0 80px rgba(0,200,83,0.08);
+  --glow-brand-sm: 0 0 20px rgba(0,200,83,0.14);
 }
 
-/* Base */
+/* ============================================================
+   Base
+   ============================================================ */
 @layer base {
   html {
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv01", "cv02", "cv11";
   }
 
   body {
@@ -116,7 +120,82 @@
     transition: background-color 200ms ease, color 200ms ease;
   }
 
-  ::-webkit-scrollbar        { width: 5px; }
+  ::-webkit-scrollbar        { width: 4px; }
   ::-webkit-scrollbar-track  { background: transparent; }
-  ::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb  { background: var(--border-strong); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+}
+
+/* ============================================================
+   Component utilities
+   ============================================================ */
+@layer components {
+  /* Glass card — semi-transparent + blur */
+  .glass {
+    background: var(--surface-2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+  }
+
+  /* Sidebar glass */
+  .glass-sidebar {
+    background: var(--surface);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-right: 1px solid var(--border);
+  }
+
+  /* Glowing active nav state */
+  .nav-active {
+    background: rgba(0, 200, 83, 0.10);
+    color: var(--accent);
+    border: 1px solid rgba(0, 200, 83, 0.20);
+    box-shadow: 0 0 16px rgba(0, 200, 83, 0.08), inset 0 0 12px rgba(0, 200, 83, 0.04);
+  }
+
+  /* Card with floating shadow */
+  .card-float {
+    box-shadow: var(--shadow-lg);
+    transition: box-shadow 280ms var(--ease-out), transform 280ms var(--ease-out);
+  }
+  .card-float:hover {
+    box-shadow: var(--shadow-lg), var(--glow-brand-sm);
+    transform: translateY(-2px);
+  }
+
+  /* Section divider with glow */
+  .divider-glow {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--accent), var(--border), transparent);
+    opacity: 0.5;
+  }
+}
+
+/* ============================================================
+   Keyframe animations
+   ============================================================ */
+@layer utilities {
+  .animate-orb-1 {
+    animation: orb-float 16s ease-in-out infinite;
+  }
+  .animate-orb-2 {
+    animation: orb-float 22s ease-in-out infinite reverse;
+  }
+  .animate-orb-3 {
+    animation: orb-float 18s ease-in-out infinite 4s;
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #00c853 0%, #69f0ae 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(3%, 2%) scale(1.04); }
+  66%       { transform: translate(-2%, 3%) scale(0.97); }
 }

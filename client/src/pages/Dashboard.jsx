@@ -25,21 +25,25 @@ export default function Dashboard() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.3 }}
     >
       <WelcomeBanner name={user?.name?.split(' ')[0] || 'Team'} />
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
         <ManagementPhoto imageUrl={mediaMap.management_photo} />
         <CompanyIntro />
       </section>
 
-      <div className="flex items-center gap-4 mb-5">
-        <div className="flex-1 h-px bg-edge" />
-        <span className="text-ink-subtle text-xs font-medium uppercase tracking-widest whitespace-nowrap">
-          This month's recognition
-        </span>
-        <div className="flex-1 h-px bg-edge" />
+      {/* Section divider */}
+      <div className="flex items-center gap-4 mb-7">
+        <div className="flex-1 divider-glow" />
+        <div className="flex items-center gap-2 px-3 py-1 rounded-full glass border border-edge">
+          <span className="w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(0,200,83,0.8)]" />
+          <span className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.14em] whitespace-nowrap">
+            This month's recognition
+          </span>
+        </div>
+        <div className="flex-1 divider-glow" />
       </div>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-5">

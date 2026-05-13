@@ -1,4 +1,3 @@
-// Tailwind config — CSS-variable-backed design tokens, class-based dark mode
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
@@ -6,18 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Surface layers
         canvas:  'var(--bg)',
         surface: 'var(--surface)',
         card:    'var(--surface-2)',
 
-        // Borders
         edge: {
           DEFAULT: 'var(--border)',
           strong:  'var(--border-strong)',
         },
 
-        // Text
         ink: {
           DEFAULT: 'var(--fg)',
           muted:   'var(--fg-muted)',
@@ -25,14 +21,12 @@ export default {
           on:      'var(--fg-on-accent)',
         },
 
-        // Brand / accent (forest green)
         brand: {
           DEFAULT: 'var(--accent)',
           h:       'var(--accent-hover)',
           soft:    'var(--accent-soft)',
         },
 
-        // Semantic states
         success: 'var(--success)',
         warning: 'var(--warning)',
         danger:  'var(--danger)',
@@ -44,18 +38,38 @@ export default {
       },
 
       boxShadow: {
-        sm:    'var(--shadow-sm)',
-        md:    'var(--shadow-md)',
-        lg:    'var(--shadow-lg)',
-        focus: 'var(--shadow-focus)',
+        sm:       'var(--shadow-sm)',
+        md:       'var(--shadow-md)',
+        lg:       'var(--shadow-lg)',
+        focus:    'var(--shadow-focus)',
+        glow:     'var(--glow-brand)',
+        'glow-sm':'var(--glow-brand-sm)',
       },
 
       borderRadius: {
         sm:   '6px',
         md:   '10px',
-        lg:   '12px',
-        xl:   '16px',
+        lg:   '14px',
+        xl:   '18px',
+        '2xl':'24px',
         pill: '999px',
+      },
+
+      backdropBlur: {
+        xs: '4px',
+        sm: '8px',
+        md: '16px',
+        lg: '24px',
+        xl: '32px',
+      },
+
+      transitionTimingFunction: {
+        'ease-out-expo': 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
+
+      transitionDuration: {
+        250: '250ms',
+        350: '350ms',
       },
     },
   },

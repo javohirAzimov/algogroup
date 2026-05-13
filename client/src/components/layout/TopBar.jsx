@@ -23,22 +23,30 @@ export default function TopBar({ onMenuClick }) {
 
   return (
     <header className="fixed top-0 left-0 lg:left-60 right-0 h-14 z-20
-                       bg-surface/90 backdrop-blur-sm border-b border-edge
+                       bg-surface/80 backdrop-blur-xl border-b border-edge
                        flex items-center px-4 gap-3">
       <button
         onClick={onMenuClick}
-        className="lg:hidden p-2 rounded-lg text-ink-muted hover:text-ink hover:bg-card transition-colors"
+        className="lg:hidden p-2 rounded-lg text-ink-muted hover:text-ink hover:bg-white/5 transition-colors"
         aria-label="Open menu"
       >
         <Menu size={18} />
       </button>
 
-      <h1 className="flex-1 text-ink font-semibold text-base truncate">{title}</h1>
+      <div className="flex-1 flex items-center gap-2">
+        <h1 className="text-ink font-semibold text-sm tracking-tight">{title}</h1>
+        <span className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-full
+                         bg-brand/10 border border-brand/20 text-brand text-[10px] font-medium
+                         shadow-[0_0_10px_rgba(0,200,83,0.08)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_4px_rgba(0,200,83,0.8)]" />
+          Live
+        </span>
+      </div>
 
       <div className="flex items-center gap-2">
         <ThemeToggle />
-        <div className="flex items-center gap-2">
-          <span className="hidden sm:block text-ink-muted text-sm">{user?.name}</span>
+        <div className="flex items-center gap-2.5 pl-2 border-l border-edge">
+          <span className="hidden sm:block text-ink-muted text-xs font-medium">{user?.name}</span>
           <Avatar initials={initials} size="sm" />
         </div>
       </div>
