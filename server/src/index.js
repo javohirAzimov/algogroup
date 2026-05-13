@@ -20,6 +20,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app  = express()
 const PORT = process.env.PORT || 5000
 
+// Required when running behind Railway/Vercel/nginx proxy
+app.set('trust proxy', 1)
+
 const allowedOrigins = [
   process.env.CLIENT_ORIGIN || 'http://localhost:3000',
 ]
