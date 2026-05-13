@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { TrendingUp, Users, Globe } from 'lucide-react'
 
 const stats = [
-  { icon: Users,     label: 'Team Members',   value: '50+' },
+  { icon: Users,     label: 'Team Members',   value: '120+' },
   { icon: Globe,     label: 'Operations',     value: 'US' },
   { icon: TrendingUp, label: 'Growing Since', value: '2018' },
 ]

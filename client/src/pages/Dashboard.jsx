@@ -5,6 +5,11 @@ import CompanyIntro from '../components/dashboard/CompanyIntro'
 import ManagementPhoto from '../components/dashboard/ManagementPhoto'
 import EmployeeOfMonth from '../components/dashboard/EmployeeOfMonth'
 import QueenOfMonth from '../components/dashboard/QueenOfMonth'
+import StatStrip from '../components/dashboard/StatStrip'
+import QuickActions from '../components/dashboard/QuickActions'
+import ActivityFeed from '../components/dashboard/ActivityFeed'
+import OnlineMembers from '../components/dashboard/OnlineMembers'
+import UpcomingMini from '../components/dashboard/UpcomingMini'
 import { useAuth } from '../context/AuthContext'
 import { getSpotlights, getSiteMedia } from '../services/api'
 
@@ -29,10 +34,21 @@ export default function Dashboard() {
     >
       <WelcomeBanner name={user?.name?.split(' ')[0] || 'Team'} />
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-        <ManagementPhoto imageUrl={mediaMap.management_photo} />
-        <CompanyIntro />
-      </section>
+      {/* KPI strip */}
+      <StatStrip />
+
+      {/* Main: 2/3 content + 1/3 sidebar */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mb-8">
+        <div className="xl:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <ManagementPhoto imageUrl={mediaMap.management_photo} />
+          <CompanyIntro />
+        </div>
+        <div className="flex flex-col gap-4">
+          <QuickActions />
+          <UpcomingMini />
+          <OnlineMembers />
+        </div>
+      </div>
 
       {/* Section divider */}
       <div className="flex items-center gap-4 mb-7">
@@ -46,7 +62,8 @@ export default function Dashboard() {
         <div className="flex-1 divider-glow" />
       </div>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {/* Spotlights + activity feed */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
         <EmployeeOfMonth
           name={emp?.name    || 'Alex Johnson'}
           role={emp?.role    || 'Senior Operations Manager'}
@@ -59,7 +76,8 @@ export default function Dashboard() {
           quote={queen?.quote || 'Bringing warmth, creativity, and energy to everything she touches.'}
           imageUrl={queen?.imageUrl}
         />
-      </section>
+        <ActivityFeed />
+      </div>
     </motion.div>
   )
 }
