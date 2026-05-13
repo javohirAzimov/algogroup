@@ -1,12 +1,13 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  LayoutDashboard, Megaphone, MessageSquare,
+  Home, LayoutDashboard, Megaphone, MessageSquare,
   BookOpen, Bot, Settings, X, ShieldCheck, LogOut,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
 const navItems = [
+  { to: '/home',          label: 'Home',           icon: Home },
   { to: '/dashboard',     label: 'Dashboard',      icon: LayoutDashboard },
   { to: '/announcements', label: 'Announcements',  icon: Megaphone },
   { to: '/suggestions',   label: 'Suggestions',    icon: MessageSquare },

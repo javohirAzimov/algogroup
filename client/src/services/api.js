@@ -40,6 +40,12 @@ export const demoteUser             = (id) => api.patch(`/users/${id}/demote`)
 // AI Assistant
 export const sendAIMessage          = (messages) => api.post('/ai/chat', { messages })
 
+// News / Hot Topics
+export const getNews                = () => api.get('/news')
+export const createNews             = (data) => api.post('/news', data)
+export const toggleNewsPin          = (id) => api.patch(`/news/${id}/pin`)
+export const deleteNews             = (id) => api.delete(`/news/${id}`)
+
 // Upload
 export const uploadFile             = (file) => {
   const form = new FormData()

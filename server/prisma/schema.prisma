@@ -19,6 +19,8 @@ model User {
   createdAt     DateTime       @default(now())
   suggestions   Suggestion[]
   announcements Announcement[]
+  chatMessages  ChatMessage[]
+  newsPosts     NewsPost[]
 }
 
 model Announcement {
@@ -70,4 +72,22 @@ model SiteMedia {
   key       String   @unique // "management_photo"
   imageUrl  String
   updatedAt DateTime @updatedAt
+}
+
+model ChatMessage {
+  id        Int      @id @default(autoincrement())
+  content   String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model NewsPost {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  isPinned  Boolean  @default(false)
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
 }
