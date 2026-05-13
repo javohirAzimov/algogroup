@@ -25,13 +25,9 @@ const allowedOrigins = [
 ]
 app.use(cors({
   origin: (origin, cb) => {
-    // Allow requests with no origin (mobile apps, curl, same-origin Vite proxy)
     if (!origin) return cb(null, true)
-    // Always allow configured origin
     if (allowedOrigins.includes(origin)) return cb(null, true)
-    // Allow any Vercel deployment (preview + production)
-    if (origin.endsWith('.vercel.app')) return cb(null, true)
-    // Allow any ngrok tunnel in development
+    if (origin.endsWith('.railway.app')) return cb(null, true)
     if (process.env.NODE_ENV !== 'production' && origin.endsWith('.ngrok-free.app')) return cb(null, true)
     cb(new Error(`CORS: origin ${origin} not allowed`))
   },
@@ -52,6 +48,13 @@ app.use('/api/spotlights',    spotlightsRouter)
 app.use('/api/upload',        uploadRouter)
 
 app.use(errorHandler)
+
+// Serve React app in production (must be after all API routes)
+if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(__dirname, '..', '..', 'client', 'dist')
+  app.use(express.static(clientDist))
+  app.get('*', (_req, res) => res.sendFile(path.join(clientDist, 'index.html')))
+}
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
