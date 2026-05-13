@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  password      String
+  name          String
+  role          String         @default("user") // "user" | "admin"
+  department    String?
+  avatarUrl     String?
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  suggestions   Suggestion[]
+  announcements Announcement[]
+}
+
+model Announcement {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  date        DateTime
+  type        String   // "event" | "notice"
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    Int?
+  author      User?    @relation(fields: [authorId], references: [id])
+}
+
+model Suggestion {
+  id          Int      @id @default(autoincrement())
+  subject     String
+  message     String
+  isAnonymous Boolean  @default(false)
+  userId      Int?
+  user        User?    @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model KnowledgeCategory {
+  id           Int      @id @default(autoincrement())
+  title        String
+  icon         String
+  articleCount Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model Spotlight {
+  id        Int      @id @default(autoincrement())
+  type      String   // "employee" | "queen"
+  name      String
+  role      String
+  quote     String
+  imageUrl  String?
+  month     Int
+  year      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteMedia {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique // "management_photo"
+  imageUrl  String
+  updatedAt DateTime @updatedAt
+}
