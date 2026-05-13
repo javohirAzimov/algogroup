@@ -1,5 +1,5 @@
-// AI Assistant page — wraps the chat UI component
 import { motion } from 'framer-motion'
+import { Bot } from 'lucide-react'
 import AIAssistantChat from '../components/ai/AIAssistant'
 
 export default function AIAssistant() {
@@ -9,13 +9,14 @@ export default function AIAssistant() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.25 }}
     >
-      <div className="mb-5">
-        <h2 className="text-lg font-semibold text-[#f1f1f1] [.light_&]:text-[#111111]">
-          AI Assistant
-        </h2>
-        <p className="text-[#888888] text-sm mt-0.5">
-          Ask anything about ALGO Group policies, events, or procedures.
-        </p>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-9 h-9 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center">
+          <Bot size={16} className="text-brand" />
+        </div>
+        <div>
+          <h2 className="text-lg font-semibold text-ink">AI Assistant</h2>
+          <p className="text-ink-muted text-sm">Ask anything about ALGO Group policies, events, or procedures.</p>
+        </div>
       </div>
       <AIAssistantChat />
     </motion.div>

@@ -37,6 +37,9 @@ export const toggleUserActive       = (id) => api.patch(`/users/${id}/toggle-act
 export const promoteUser            = (id) => api.patch(`/users/${id}/promote`)
 export const demoteUser             = (id) => api.patch(`/users/${id}/demote`)
 
+// AI Assistant
+export const sendAIMessage          = (messages) => api.post('/ai/chat', { messages })
+
 // Upload
 export const uploadFile             = (file) => {
   const form = new FormData()

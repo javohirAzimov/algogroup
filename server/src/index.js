@@ -14,6 +14,7 @@ import authRouter          from './routes/auth.js'
 import usersRouter         from './routes/users.js'
 import spotlightsRouter    from './routes/spotlights.js'
 import uploadRouter        from './routes/upload.js'
+import aiRouter            from './routes/ai.js'
 import errorHandler        from './middleware/errorHandler.js'
 
 const prisma = new PrismaClient()
@@ -64,6 +65,7 @@ app.use('/api/suggestions',   suggestionsRouter)
 app.use('/api/knowledge',     knowledgeRouter)
 app.use('/api/spotlights',    spotlightsRouter)
 app.use('/api/upload',        uploadRouter)
+app.use('/api/ai',            aiRouter)
 
 app.use(errorHandler)
 
