@@ -34,7 +34,7 @@ export default function Layout() {
       <TopBar onMenuClick={() => setMobileOpen(true)} />
 
       <main className="pt-14 lg:pl-60 min-h-screen">
-        <div className="max-w-5xl mx-auto px-5 sm:px-7 py-8">
+        <div className="px-6 sm:px-8 lg:px-10 py-8">
           <Outlet />
         </div>
       </main>

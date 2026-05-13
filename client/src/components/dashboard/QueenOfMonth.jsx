@@ -13,8 +13,8 @@ export default function QueenOfMonth({ name, role, quote, imageUrl }) {
       <div className="absolute -top-8 -right-8 w-36 h-36 bg-rose-500/10 blur-2xl rounded-full pointer-events-none
                       transition-opacity duration-500 opacity-60 group-hover:opacity-100" />
 
-      {/* Photo / illustration panel */}
-      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-rose-500/10 via-transparent to-transparent">
+      {/* Photo / illustration panel — 16:9 cinematic */}
+      <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-rose-500/10 via-transparent to-transparent">
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
         <img
           src={imageUrl || '/Employee%20of%20the%20month-pana.svg'}
@@ -34,11 +34,11 @@ export default function QueenOfMonth({ name, role, quote, imageUrl }) {
       </div>
 
       {/* Info */}
-      <div className="p-4 relative">
-        <p className="text-ink font-semibold text-sm">{name}</p>
-        <p className="text-ink-muted text-xs mt-0.5">{role}</p>
+      <div className="p-5 relative">
+        <p className="text-ink font-semibold text-base">{name}</p>
+        <p className="text-ink-muted text-sm mt-0.5">{role}</p>
         <div className="mt-3 pt-3 border-t border-edge">
-          <p className="text-ink-muted text-xs italic leading-relaxed">"{quote}"</p>
+          <p className="text-ink-muted text-sm italic leading-relaxed">"{quote}"</p>
         </div>
       </div>
     </motion.div>

@@ -39,7 +39,7 @@ export default function Dashboard() {
 
       {/* Main: 2/3 content + 1/3 sidebar */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mb-8">
-        <div className="xl:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="xl:col-span-2 flex flex-col gap-4">
           <ManagementPhoto imageUrl={mediaMap.management_photo} />
           <CompanyIntro />
         </div>
