@@ -58,12 +58,8 @@ function SidebarShell({ onClose }) {
       {/* Logo */}
       <div className="px-5 py-5 border-b border-edge flex items-center justify-between flex-shrink-0">
         <div className="flex items-center gap-3">
-          <div className="relative w-8 h-8 flex-shrink-0">
-            <div className="absolute inset-0 rounded-lg bg-brand/20 blur-sm" />
-            <div className="relative w-8 h-8 rounded-lg bg-brand flex items-center justify-center
-                            shadow-[0_0_12px_rgba(0,200,83,0.5)]">
-              <span className="text-white font-bold text-sm tracking-tight">A</span>
-            </div>
+          <div className="w-9 h-9 flex-shrink-0 rounded-lg overflow-hidden bg-white shadow-[0_0_10px_rgba(0,200,83,0.25)]">
+            <img src="/logo.png" alt="ALGO Group" className="w-full h-full object-cover" />
           </div>
           <div>
             <p className="text-ink font-semibold text-sm leading-tight tracking-tight">ALGO Group</p>
