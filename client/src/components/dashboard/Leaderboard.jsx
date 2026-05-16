@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Trophy } from 'lucide-react'
-
-const URL = 'https://kpi-dashboard-production-3259.up.railway.app/api/public/leaderboard?api_key=0dff62dac4c138e0dd251d84991b3e1f8bc6be8b0069d57fa5050fcdc4cab60'
+import api from '../../services/api'
 
 const MEDALS = { 1: '🥇', 2: '🥈', 3: '🥉' }
 
@@ -31,13 +30,17 @@ const DEFAULT = {
 }
 
 export default function Leaderboard() {
-  const [rows, setRows] = useState([])
+  const [rows, setRows]   = useState([])
+  const [error, setError] = useState('')
 
   function load() {
-    fetch(URL)
-      .then(r => r.json())
-      .then(d => setRows(d.leaderboard ?? []))
-      .catch(() => {})
+    api.get('/leaderboard')
+      .then(({ data: d }) => {
+        if (d.error) { setError(d.error); return }
+        setRows(d.leaderboard ?? [])
+        setError('')
+      })
+      .catch(e => setError(e.message))
   }
 
   useEffect(() => {
@@ -45,6 +48,14 @@ export default function Leaderboard() {
     const id = setInterval(load, 30_000)
     return () => clearInterval(id)
   }, [])
+
+  if (error) return (
+    <div className="glass rounded-2xl border border-edge px-5 py-6 text-center">
+      <Trophy size={20} className="text-amber-400 mx-auto mb-2" />
+      <p className="text-ink text-sm font-semibold mb-1">Leaderboard unavailable</p>
+      <p className="text-ink-subtle text-xs font-mono">{error}</p>
+    </div>
+  )
 
   if (!rows.length) return null
 

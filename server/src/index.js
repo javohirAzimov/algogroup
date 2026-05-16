@@ -19,6 +19,7 @@ import spotlightsRouter    from './routes/spotlights.js'
 import uploadRouter        from './routes/upload.js'
 import aiRouter            from './routes/ai.js'
 import newsRouter          from './routes/news.js'
+import leaderboardRouter   from './routes/leaderboard.js'
 import errorHandler        from './middleware/errorHandler.js'
 
 dotenv.config()
@@ -74,6 +75,7 @@ app.use('/api/spotlights',    spotlightsRouter)
 app.use('/api/upload',        uploadRouter)
 app.use('/api/ai',            aiRouter)
 app.use('/api/news',          newsRouter)
+app.use('/api/leaderboard',   leaderboardRouter)
 
 app.use(errorHandler)
 
