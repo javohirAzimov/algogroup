@@ -10,6 +10,7 @@ import QuickActions from '../components/dashboard/QuickActions'
 import ActivityFeed from '../components/dashboard/ActivityFeed'
 import OnlineMembers from '../components/dashboard/OnlineMembers'
 import UpcomingMini from '../components/dashboard/UpcomingMini'
+import Leaderboard from '../components/dashboard/Leaderboard'
 import { useAuth } from '../context/AuthContext'
 import { getSpotlights, getSiteMedia } from '../services/api'
 
@@ -63,7 +64,7 @@ export default function Dashboard() {
       </div>
 
       {/* Spotlights + activity feed */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mb-8">
         <EmployeeOfMonth
           name={emp?.name    || 'Alex Johnson'}
           role={emp?.role    || 'Senior Operations Manager'}
@@ -78,6 +79,20 @@ export default function Dashboard() {
         />
         <ActivityFeed />
       </div>
+
+      {/* Leaderboard divider */}
+      <div className="flex items-center gap-4 mb-7">
+        <div className="flex-1 divider-glow" />
+        <div className="flex items-center gap-2 px-3 py-1 rounded-full glass border border-edge">
+          <span className="text-amber-400 text-xs">🏆</span>
+          <span className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.14em] whitespace-nowrap">
+            KPI Leaderboard
+          </span>
+        </div>
+        <div className="flex-1 divider-glow" />
+      </div>
+
+      <Leaderboard />
     </motion.div>
   )
 }
