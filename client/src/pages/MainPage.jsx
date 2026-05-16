@@ -1,47 +1,42 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Home, Wifi } from 'lucide-react'
-import NewsPanel from '../components/main/NewsPanel'
-import GroupChat from '../components/main/GroupChat'
-import { useSocket } from '../context/SocketContext'
+import WelcomeBanner from '../components/dashboard/WelcomeBanner'
+import StatStrip from '../components/dashboard/StatStrip'
+import ManagementPhoto from '../components/dashboard/ManagementPhoto'
+import CompanyIntro from '../components/dashboard/CompanyIntro'
+import QuickActions from '../components/dashboard/QuickActions'
+import UpcomingMini from '../components/dashboard/UpcomingMini'
+import OnlineMembers from '../components/dashboard/OnlineMembers'
+import { useAuth } from '../context/AuthContext'
+import { getSiteMedia } from '../services/api'
 
 export default function MainPage() {
-  const { onlineCount } = useSocket()
+  const { user } = useAuth()
+  const [mediaMap, setMediaMap] = useState({})
+
+  useEffect(() => {
+    getSiteMedia().then(r => setMediaMap(r.data)).catch(() => {})
+  }, [])
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-      className="flex flex-col"
-      style={{ height: 'calc(100vh - 7.5rem)' }}
+      transition={{ duration: 0.3 }}
     >
-      {/* Page header */}
-      <div className="flex items-center justify-between mb-4 flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center">
-            <Home size={16} className="text-brand" />
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold text-ink">Home</h2>
-            <p className="text-ink-muted text-sm">Latest news and team chat</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass border border-edge">
-          <Wifi size={12} className="text-brand" />
-          <span className="text-xs text-ink-muted font-medium">{onlineCount} online</span>
-        </div>
-      </div>
+      <WelcomeBanner name={user?.name?.split(' ')[0] || 'Team'} />
 
-      {/* Two-column layout */}
-      <div className="flex-1 flex gap-5 overflow-hidden min-h-0">
-        {/* Left — News feed (wider) */}
-        <div className="flex-[3] glass border border-edge rounded-xl overflow-hidden flex flex-col min-h-0">
-          <NewsPanel />
-        </div>
+      <StatStrip />
 
-        {/* Right — Group chat */}
-        <div className="flex-[2] glass border border-edge rounded-xl overflow-hidden flex flex-col min-h-0">
-          <GroupChat />
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mb-8">
+        <div className="xl:col-span-2 flex flex-col gap-4">
+          <ManagementPhoto imageUrl={mediaMap.management_photo} />
+          <CompanyIntro />
+        </div>
+        <div className="flex flex-col gap-4">
+          <QuickActions />
+          <UpcomingMini />
+          <OnlineMembers />
         </div>
       </div>
     </motion.div>
