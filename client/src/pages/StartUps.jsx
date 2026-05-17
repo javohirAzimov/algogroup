@@ -44,12 +44,12 @@ function StartupCard({ startup, index }) {
         <p className="text-ink-muted text-sm leading-relaxed flex-1">{startup.description}</p>
 
         <div className="mt-4 pt-4 border-t border-edge flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <User size={11} className="text-ink-subtle" />
+          <div className="flex items-center gap-2">
+            <User size={13} className="text-ink-muted flex-shrink-0" />
             <div>
-              <span className="text-ink-subtle text-[11px]">{startup.teamLead}</span>
+              <span className="text-ink text-xs font-medium">{startup.teamLead}</span>
               {startup.department && (
-                <span className="text-ink-subtle text-[10px] block leading-none mt-0.5 opacity-70">{startup.department}</span>
+                <span className="text-ink-muted text-[11px] block leading-tight mt-0.5">{startup.department}</span>
               )}
             </div>
           </div>
