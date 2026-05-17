@@ -111,6 +111,12 @@ io.use((socket, next) => {
 // Track online users: userId → { name, department, count }
 const onlineUsers = new Map()
 
+function broadcastOnline() {
+  const list = [...onlineUsers.entries()].map(([id, { name, department }]) => ({ id, name, department }))
+  io.emit('online_count', onlineUsers.size)
+  io.emit('online_users', list)
+}
+
 io.on('connection', async (socket) => {
   const { id: userId, name, department } = socket.data.user
 
@@ -120,7 +126,7 @@ io.on('connection', async (socket) => {
   } else {
     onlineUsers.set(userId, { name, department, count: 1 })
   }
-  io.emit('online_count', onlineUsers.size)
+  broadcastOnline()
 
   // Send last 100 chat messages to this client
   try {
@@ -154,7 +160,7 @@ io.on('connection', async (socket) => {
       entry.count--
       if (entry.count <= 0) onlineUsers.delete(userId)
     }
-    io.emit('online_count', onlineUsers.size)
+    broadcastOnline()
   })
 })
 
