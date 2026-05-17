@@ -1,12 +1,19 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { UserPlus, Eye, EyeOff } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 export default function Register() {
-  const { register } = useAuth()
+  const { register, user, loading: authLoading } = useAuth()
   const navigate = useNavigate()
+
+  if (authLoading) return (
+    <div className="min-h-screen bg-canvas flex items-center justify-center">
+      <div className="w-6 h-6 border-2 border-brand border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
+  if (user) return <Navigate to="/home" replace />
 
   const [form, setForm]       = useState({ name: '', email: '', password: '', department: '' })
   const [showPw, setShowPw]   = useState(false)

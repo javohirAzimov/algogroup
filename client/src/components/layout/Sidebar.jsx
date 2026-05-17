@@ -116,7 +116,7 @@ function SidebarShell({ onClose }) {
 
       {/* User footer */}
       <div className="px-3 py-3 border-t border-edge flex-shrink-0">
-        <div className="flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-white/5 transition-colors group">
+        <div className="flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
           <div className="relative w-7 h-7 flex-shrink-0">
             <div className="absolute inset-0 rounded-full bg-brand/30 blur-sm" />
             <div className="relative w-7 h-7 rounded-full bg-brand/20 border border-brand/30
@@ -133,9 +133,9 @@ function SidebarShell({ onClose }) {
           <button
             onClick={handleLogout}
             title="Sign out"
-            className="text-ink-subtle hover:text-danger transition-colors p-1 rounded opacity-0 group-hover:opacity-100"
+            className="text-ink-subtle hover:text-danger transition-colors p-1.5 rounded-md hover:bg-danger/10"
           >
-            <LogOut size={13} />
+            <LogOut size={14} />
           </button>
         </div>
       </div>
