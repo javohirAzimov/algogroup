@@ -1,21 +1,15 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Pin, TrendingUp, Bell } from 'lucide-react'
+import { Pin, Bell } from 'lucide-react'
 import FeaturedEventCard from '../components/announcements/FeaturedEventCard'
 import NoticeCard from '../components/announcements/NoticeCard'
+import GroupChat from '../components/main/GroupChat'
 import { getAnnouncements } from '../services/api'
 
 const PINNED = [
   { title: 'Company Handbook Updated',   date: 'May 1, 2025' },
   { title: 'New Benefits Portal Live',   date: 'Apr 15, 2025' },
   { title: 'Holiday Schedule Published', date: 'Apr 1, 2025' },
-]
-
-const TRENDING = [
-  'Q2 Performance Reviews Start',
-  'New Remote Work Policy',
-  'Team Building Registration Open',
-  'Wellness Program Launch',
 ]
 
 export default function Announcements() {
@@ -115,20 +109,10 @@ export default function Announcements() {
         <motion.div
           initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.28, delay: 0.16 }}
-          className="glass rounded-xl p-4"
+          className="glass rounded-xl overflow-hidden border border-edge"
+          style={{ height: '480px' }}
         >
-          <div className="flex items-center gap-2 mb-3">
-            <TrendingUp size={12} className="text-amber-400" />
-            <p className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.12em]">Trending</p>
-          </div>
-          <div className="flex flex-col gap-2.5">
-            {TRENDING.map((item, i) => (
-              <div key={item} className="flex items-center gap-2.5">
-                <span className="text-ink-subtle text-[10px] font-bold w-4 flex-shrink-0">{i + 1}</span>
-                <p className="text-ink-muted text-xs leading-snug">{item}</p>
-              </div>
-            ))}
-          </div>
+          <GroupChat />
         </motion.div>
 
         <motion.div
