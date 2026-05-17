@@ -1,18 +1,8 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Lightbulb, TrendingUp, MessageSquare, CheckCircle, Clock, Users } from 'lucide-react'
+import { Lightbulb, MessageSquare, Users, ArrowRight } from 'lucide-react'
 import SuggestionForm from '../components/suggestions/SuggestionForm'
-
-const STATS = [
-  { icon: MessageSquare, label: 'Total Submitted', value: '24', color: 'text-indigo-400', bg: 'bg-indigo-400/10' },
-  { icon: CheckCircle,   label: 'Implemented',     value: '8',  color: 'text-brand',      bg: 'bg-brand/10' },
-  { icon: Clock,         label: 'Under Review',    value: '12', color: 'text-amber-400',  bg: 'bg-amber-400/10' },
-]
-
-const RECENT = [
-  { text: 'Add a team calendar feature',              category: 'Product',    time: '2d ago' },
-  { text: 'Improve onboarding docs for new hires',    category: 'HR',         time: '4d ago' },
-  { text: 'Monthly team lunch proposal',              category: 'Culture',    time: '1w ago' },
-]
+import { getSuggestionStats } from '../services/api'
 
 const CATEGORIES = ['Culture', 'Product', 'HR', 'Operations', 'IT', 'Other']
 
@@ -23,7 +13,19 @@ const TIPS = [
   'Anonymous feedback is welcome',
 ]
 
+const HOW_IT_WORKS = [
+  { step: '1', label: 'Submit',  desc: 'Share your idea or concern using the form — anonymously if you prefer.' },
+  { step: '2', label: 'Review',  desc: 'Management reads every submission and evaluates feasibility.' },
+  { step: '3', label: 'Act',     desc: 'Approved ideas are implemented and the team is notified.' },
+]
+
 export default function Suggestions() {
+  const [total, setTotal] = useState(null)
+
+  useEffect(() => {
+    getSuggestionStats().then(r => setTotal(r.data.total)).catch(() => {})
+  }, [])
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -50,47 +52,53 @@ export default function Suggestions() {
 
       {/* Sidebar */}
       <div className="flex flex-col gap-4">
+
+        {/* Stats */}
         <motion.div
           initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.28, delay: 0.1 }}
           className="glass rounded-xl p-4"
         >
           <p className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.12em] mb-3">Feedback Stats</p>
-          <div className="flex flex-col gap-3">
-            {STATS.map(({ icon: Icon, label, value, color, bg }) => (
-              <div key={label} className="flex items-center gap-3">
-                <div className={`w-7 h-7 rounded-lg ${bg} flex items-center justify-center flex-shrink-0`}>
-                  <Icon size={13} className={color} />
-                </div>
-                <p className="text-ink-muted text-xs flex-1">{label}</p>
-                <span className={`${color} text-sm font-bold`}>{value}</span>
-              </div>
-            ))}
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 rounded-lg bg-indigo-400/10 flex items-center justify-center flex-shrink-0">
+              <MessageSquare size={13} className="text-indigo-400" />
+            </div>
+            <p className="text-ink-muted text-xs flex-1">Total Submitted</p>
+            <span className="text-indigo-400 text-sm font-bold">
+              {total === null ? '—' : total}
+            </span>
           </div>
         </motion.div>
 
+        {/* How it works */}
         <motion.div
           initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.28, delay: 0.16 }}
           className="glass rounded-xl p-4"
         >
-          <div className="flex items-center gap-2 mb-3">
-            <TrendingUp size={12} className="text-brand" />
-            <p className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.12em]">Recent</p>
-          </div>
-          <div className="flex flex-col">
-            {RECENT.map(({ text, category, time }) => (
-              <div key={text} className="py-2.5 border-b border-edge last:border-0">
-                <p className="text-ink text-xs font-medium leading-snug">{text}</p>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="px-1.5 py-0.5 rounded bg-brand/10 text-brand text-[10px] font-medium">{category}</span>
-                  <span className="text-ink-subtle text-[10px]">{time}</span>
+          <p className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.12em] mb-4">How It Works</p>
+          <div className="flex flex-col gap-3">
+            {HOW_IT_WORKS.map(({ step, label, desc }, i) => (
+              <div key={step} className="flex gap-3">
+                <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div className="w-6 h-6 rounded-full bg-brand/15 border border-brand/30 flex items-center justify-center">
+                    <span className="text-brand text-[10px] font-bold">{step}</span>
+                  </div>
+                  {i < HOW_IT_WORKS.length - 1 && (
+                    <div className="w-px flex-1 bg-edge min-h-[12px]" />
+                  )}
+                </div>
+                <div className="pb-3">
+                  <p className="text-ink text-xs font-semibold leading-none mb-1">{label}</p>
+                  <p className="text-ink-muted text-[11px] leading-relaxed">{desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </motion.div>
 
+        {/* Categories */}
         <motion.div
           initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.28, delay: 0.2 }}
@@ -106,6 +114,7 @@ export default function Suggestions() {
           </div>
         </motion.div>
 
+        {/* Tips */}
         <motion.div
           initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.28, delay: 0.24 }}
@@ -124,6 +133,7 @@ export default function Suggestions() {
             ))}
           </div>
         </motion.div>
+
       </div>
     </motion.div>
   )

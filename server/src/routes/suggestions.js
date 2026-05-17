@@ -1,7 +1,7 @@
-// Suggestion routes — POST /api/suggestions
 import { Router } from 'express'
-import { create } from '../controllers/suggestionsController.js'
+import { getStats, create } from '../controllers/suggestionsController.js'
 
 const router = Router()
+router.get('/stats', getStats)
 router.post('/', create)
 export default router

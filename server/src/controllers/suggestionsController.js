@@ -1,7 +1,15 @@
-// Saves suggestion to DB and sends email to management via Nodemailer
 import { PrismaClient } from '@prisma/client'
 import { sendSuggestionEmail } from '../utils/mailer.js'
 const prisma = new PrismaClient()
+
+export async function getStats(_req, res, next) {
+  try {
+    const total = await prisma.suggestion.count()
+    res.json({ total })
+  } catch (err) {
+    next(err)
+  }
+}
 
 export async function create(req, res, next) {
   try {

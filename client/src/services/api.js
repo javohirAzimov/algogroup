@@ -20,6 +20,7 @@ export const updateAnnouncement     = (id, data) => api.put(`/announcements/${id
 export const deleteAnnouncement     = (id) => api.delete(`/announcements/${id}`)
 
 // Suggestions
+export const getSuggestionStats     = () => api.get('/suggestions/stats')
 export const submitSuggestion       = (data) => api.post('/suggestions', data)
 
 // Knowledge base
