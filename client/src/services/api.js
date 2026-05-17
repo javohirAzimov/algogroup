@@ -47,6 +47,12 @@ export const createNews             = (data) => api.post('/news', data)
 export const toggleNewsPin          = (id) => api.patch(`/news/${id}/pin`)
 export const deleteNews             = (id) => api.delete(`/news/${id}`)
 
+// Startups
+export const getStartups    = () => api.get('/startups')
+export const createStartup  = (data) => api.post('/startups', data)
+export const updateStartup  = (id, data) => api.put(`/startups/${id}`, data)
+export const deleteStartup  = (id) => api.delete(`/startups/${id}`)
+
 // Upload
 export const uploadFile             = (file) => {
   const form = new FormData()

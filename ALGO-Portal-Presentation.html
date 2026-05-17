@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  body { margin:0; padding:0; background:#030f05; }
+  .slide { page-break-after: always; page-break-inside: avoid; }
+  .slide:last-child { page-break-after: auto; }
+</style>
+</head>
+<body>
+<div class="slide" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;text-align:center;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(0,200,83,0.07),transparent 65%);pointer-events:none;"></div>
+    <div style="color:#00c853;font-size:11px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-bottom:32px;opacity:.7;">ALGO GROUP · INTERNAL PORTAL · 2026</div>
+    <h1 style="color:#00c853;font-size:80px;font-weight:900;font-family:Inter,sans-serif;line-height:.95;margin:0 0 24px;letter-spacing:-.03em;">ALGO<br>GROUP<br><span style="font-size:60px;">PORTAL</span></h1>
+    <div style="width:60px;height:2px;background:linear-gradient(90deg,transparent,#00c853,transparent);margin:0 auto 24px;"></div>
+    <p style="color:rgba(255,255,255,0.45);font-size:14px;font-family:Inter,sans-serif;line-height:1.6;max-width:520px;margin:0 auto 36px;">Xodimlar uchun yagona korporativ platforma — real-time yangiliklar, jamoa chat, AI yordamchi va to'liq admin boshqaruv paneli.</p>
+    <div style="display:flex;gap:48px;justify-content:center;">
+      <div style="text-align:center;"><div style="color:#00c853;font-size:36px;font-weight:900;font-family:Inter,sans-serif;line-height:1;">7</div><div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:4px;">Sahifalar</div></div><div style="text-align:center;"><div style="color:#00c853;font-size:36px;font-weight:900;font-family:Inter,sans-serif;line-height:1;">AI</div><div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:4px;">Assistant</div></div><div style="text-align:center;"><div style="color:#00c853;font-size:36px;font-weight:900;font-family:Inter,sans-serif;line-height:1;">⚡</div><div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:4px;">Real-time</div></div><div style="text-align:center;"><div style="color:#00c853;font-size:36px;font-weight:900;font-family:Inter,sans-serif;line-height:1;">🛡️</div><div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:4px;">Admin Panel</div></div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        01 — KIRISH
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Login Sahifasi</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Admin va xodim uchun alohida kirish. JWT token asosida haqiqiy autentifikatsiya — localStorage + REST API. Glass morfizm dizayn.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Xodim kirish</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Admin kirish</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">JWT Auth</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Glass UI</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">01 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="display:flex;align-items:center;justify-content:center;width:100%;height:380px;background:rgba(0,10,3,0.8);border:1px solid rgba(0,200,83,0.2);border-radius:14px;box-shadow:0 0 60px rgba(0,200,83,0.06);">
+    <div style="width:320px;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="color:#00c853;font-size:18px;font-weight:900;font-family:Inter,sans-serif;letter-spacing:-.02em;line-height:1.1;">ALGO<br>PORTAL</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:9px;font-family:Inter,sans-serif;letter-spacing:.1em;margin-top:4px;">ALGO GROUP · INTERNAL</div>
+      </div>
+      <div style="display:flex;gap:0;border:1px solid rgba(0,200,83,0.2);border-radius:8px;overflow:hidden;margin-bottom:16px;">
+        <div style="flex:1;padding:7px;text-align:center;background:#00c853;color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">👤 Xodim</div>
+        <div style="flex:1;padding:7px;text-align:center;background:transparent;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🛡️ Admin</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div><div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;margin-bottom:4px;">EMAIL</div><div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">email@algogroup.us</div></div>
+        <div><div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;margin-bottom:4px;">PAROL</div><div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">••••••••</div></div>
+        <div style="background:#00c853;border-radius:8px;padding:9px 16px;text-align:center;color:white;font-weight:600;font-size:12px;font-family:Inter,sans-serif;cursor:pointer;">Kirish →</div>
+      </div>
+      <div style="text-align:center;margin-top:12px;color:rgba(255,255,255,0.22);font-size:9px;font-family:Inter,sans-serif;">Accountingiz yo'qmi? <span style="color:#00c853;">Account yaratish</span></div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        02 — RO'YXATDAN O'TISH
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Account Yaratish</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Yangi xodim ism, familiya, email, departament va parol kiritadi. So'rov admin tasdiqlaguncha tizimga kirish imkoni yo'q.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">4 departament</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Pending queue</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Email validatsiya</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Xavfsiz oqim</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">02 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="display:flex;align-items:center;justify-content:center;width:100%;height:380px;background:rgba(0,10,3,0.8);border:1px solid rgba(0,200,83,0.2);border-radius:14px;">
+    <div style="width:340px;">
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="color:#00c853;font-size:16px;font-weight:900;font-family:Inter,sans-serif;">ALGO PORTAL</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:9px;font-family:Inter,sans-serif;margin-top:2px;">YANGI ACCOUNT YARATISH</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Jasur</div><div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Karimov</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">email@algogroup.us</div>
+        <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;display:flex;justify-content:space-between;align-items:center;">— Departament tanlang — <span>▾</span></div>
+        <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Kamida 6 belgi</div>
+        <div style="background:#00c853;border-radius:8px;padding:9px 16px;text-align:center;color:white;font-weight:600;font-size:12px;font-family:Inter,sans-serif;cursor:pointer;">Yuborish →</div>
+      </div>
+      <div style="text-align:center;margin-top:10px;color:rgba(255,255,255,0.22);font-size:9px;font-family:Inter,sans-serif;">Accountingiz bormi? <span style="color:#00c853;">Kirish</span></div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        03 — BOSH SAHIFA · YANGILIKLAR
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Hot News Panel</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Admin muhim yangiliklar va xabarlarni chiqaradi. Barcha xodimlar Socket.io orqali real-vaqtda ko'radi. Pin qilish va kengaytirish imkoni.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Admin post</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Real-time</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Pin/Unpin</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Expand toggle</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">03 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Internal Portal</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Home</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Dashboard</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Suggestions</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Knowledge Base</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">AI Assistant</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Settings</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 16px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;justify-content:between;flex-shrink:0;">
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div style="width:28px;height:28px;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;"><span style="color:#00c853;font-size:13px;">📰</span></div>
+    <div>
+      <div style="color:white;font-size:12px;font-weight:600;font-family:Inter,sans-serif;">Hot News</div>
+    </div>
+  </div>
+</div>
+  <div style="flex:1;overflow:hidden;padding:12px;display:flex;flex-direction:column;gap:8px;">
+    <!-- pinned post -->
+    <div style="background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.35);border-radius:10px;padding:10px;position:relative;">
+      <span style="position:absolute;top:8px;right:8px;background:rgba(0,200,83,0.12);color:#00c853;font-size:8px;font-weight:600;font-family:Inter,sans-serif;padding:2px 7px;border-radius:100px;border:1px solid rgba(0,200,83,0.3);">📌 Pinned</span>
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.25);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;">A</div>
+        <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">Q1 moliyaviy natijalar e'lon qilindi</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">Admin · 2s oldin</div></div>
+      </div>
+      <div style="color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;line-height:1.5;margin-left:27px;">Bu chorakda kompaniya rekord ko'rsatkichga erishdi. Batafsil ma'lumot uchun…</div>
+    </div>
+    <!-- post 2 -->
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:10px;">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;">A</div>
+        <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">Yangi xodimlar onboarding — 14-may</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">Admin · 1s oldin</div></div>
+      </div>
+      <div style="color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;margin-left:27px;">Yangi xodimlar guruhimizga qo'shilmoqda. Ularni qutlang!</div>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        04 — BOSH SAHIFA · CHAT
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Jamoa Guruhi Chati</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Barcha onlayn xodimlar o'rtasida real-time chat. To'liq tarix saqlanadi, hech qachon o'chirilmaydi. Sana ajratuvchilari va guruh ko'rinishi bilan.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">WebSocket</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Persistent history</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Date dividers</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Online count</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">04 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Internal Portal</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Home</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Dashboard</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Suggestions</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Knowledge Base</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">AI Assistant</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Settings</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 16px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;justify-content:between;flex-shrink:0;">
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div style="width:28px;height:28px;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;"><span style="color:#00c853;font-size:13px;">💬</span></div>
+    <div>
+      <div style="color:white;font-size:12px;font-weight:600;font-family:Inter,sans-serif;">Jamoa Guruhi Chati</div>
+    </div>
+  </div>
+</div>
+  <div style="flex:1;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;gap:6px;">
+    <div style="display:flex;align-items:center;gap:8px;margin:6px 0;"><div style="flex:1;height:1px;background:rgba(0,200,83,0.2)"></div><span style="font-size:9px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Bugun</span><div style="flex:1;height:1px;background:rgba(0,200,83,0.2)"></div></div>
+    <!-- others -->
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+      <div style="display:flex;align-items:center;gap:5px;"><div style="width:16px;height:16px;border-radius:50%;background:rgba(0,200,83,0.2);display:flex;align-items:center;justify-content:center;font-size:7px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;">S</div><span style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">Sardor M.</span><span style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">09:15</span></div>
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;border-top-left-radius:3px;padding:7px 11px;font-size:10.5px;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif;max-width:75%;">Hammaga xayrli tong! 👋</div>
+    </div>
+    <!-- own -->
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
+      <div style="background:#00c853;border-radius:10px;border-top-right-radius:3px;padding:7px 11px;font-size:10.5px;color:white;font-family:Inter,sans-serif;max-width:75%;">Xayrli tong! Bugun yig'ilish bormi?</div>
+    </div>
+    <!-- others 2 -->
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+      <div style="display:flex;align-items:center;gap:5px;"><div style="width:16px;height:16px;border-radius:50%;background:rgba(100,180,100,0.2);display:flex;align-items:center;justify-content:center;font-size:7px;color:#80cfa0;font-weight:700;font-family:Inter,sans-serif;">B</div><span style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">Bobur R.</span></div>
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;border-top-left-radius:3px;padding:7px 11px;font-size:10.5px;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif;max-width:75%;">Ha, soat 14:00 da Teams orqali 📅</div>
+    </div>
+  </div>
+  <div style="padding:8px 12px;border-top:1px solid rgba(0,200,83,0.2);display:flex;gap:8px;align-items:center;flex-shrink:0;">
+    <div style="flex:1;background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:7px 12px;font-size:10px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Xabar yozing… (Enter — yuborish)</div>
+    <div style="width:30px;height:30px;background:#00c853;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;">➤</div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        05 — DASHBOARD
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Bosh Boshqaruv Paneli</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Umumiy statistika kartochkalar: e'lonlar, takliflar, bilim bazasi. So'nggi faollik va onlayn xodimlar soni real-vaqtda yangilanadi.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Stats cards</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Live feed</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Online count</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Quick access</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">05 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Internal Portal</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Home</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Dashboard</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Suggestions</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Knowledge Base</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">AI Assistant</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Settings</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:12px 16px;border-bottom:1px solid rgba(0,200,83,0.2);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;">
+    <div><div style="color:white;font-size:12px;font-weight:700;font-family:Inter,sans-serif;">Salom, Jasur! 👋</div><div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">Bugun qaysi moduldansiz?</div></div>
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:20px;padding:4px 10px;display:flex;align-items:center;gap:5px;">
+      <span style="color:#00c853;font-size:10px;">📶</span><span style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">4 online</span>
+    </div>
+  </div>
+  <!-- stats -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 14px;flex-shrink:0;">
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:10px;text-align:center;">
+      <div style="font-size:16px;margin-bottom:3px;">📢</div>
+      <div style="color:#00c853;font-size:15px;font-weight:700;font-family:Inter,sans-serif;">12</div>
+      <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">E'lonlar</div>
+    </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:10px;text-align:center;">
+      <div style="font-size:16px;margin-bottom:3px;">💡</div>
+      <div style="color:#00c853;font-size:15px;font-weight:700;font-family:Inter,sans-serif;">8</div>
+      <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">Takliflar</div>
+    </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:10px;text-align:center;">
+      <div style="font-size:16px;margin-bottom:3px;">📚</div>
+      <div style="color:#00c853;font-size:15px;font-weight:700;font-family:Inter,sans-serif;">6</div>
+      <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">Maqolalar</div>
+    </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:10px;text-align:center;">
+      <div style="font-size:16px;margin-bottom:3px;">🤖</div>
+      <div style="color:#00c853;font-size:15px;font-weight:700;font-family:Inter,sans-serif;">AI</div>
+      <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">Yordamchi</div>
+    </div>
+  </div>
+  <!-- announcements preview -->
+  <div style="flex:1;overflow:hidden;padding:0 14px 10px;display:flex;flex-direction:column;gap:6px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">So'nggi E'lonlar</div>
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="color:rgba(255,255,255,0.8);font-size:10px;font-family:Inter,sans-serif;">Oy xodimi — Sardor Mirzayev</div>
+      <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">2s oldin</div>
+    </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="color:rgba(255,255,255,0.8);font-size:10px;font-family:Inter,sans-serif;">Yangi modul: Safety 2026</div>
+      <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">5s oldin</div>
+    </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="color:rgba(255,255,255,0.8);font-size:10px;font-family:Inter,sans-serif;">Korporativ bayram — 15-may</div>
+      <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">1k oldin</div>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        06 — E'LONLAR
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">E'lonlar Tasmasi</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Kompaniya ichki e'lonlarini ko'rish. Admin tomonidan yaratilgan e'lonlar barcha xodimlarga darhol yetkaziladi. Vaqt bo'yicha tartiblangan.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Feed view</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Admin created</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Timestamp</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Real-time</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">06 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Internal Portal</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Home</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Dashboard</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Suggestions</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Knowledge Base</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">AI Assistant</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Settings</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 16px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;justify-content:between;flex-shrink:0;">
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div style="width:28px;height:28px;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;"><span style="color:#00c853;font-size:13px;">📢</span></div>
+    <div>
+      <div style="color:white;font-size:12px;font-weight:600;font-family:Inter,sans-serif;">E'lonlar</div>
+    </div>
+  </div>
+</div>
+  <div style="flex:1;overflow:hidden;padding:12px;display:flex;flex-direction:column;gap:8px;">
+    
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:10px 12px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px;">
+          <div style="color:white;font-size:11px;font-weight:600;font-family:Inter,sans-serif;flex:1;">Korporativ bayram — 15-may 2026</div>
+          <span style="background:rgba(0,200,83,0.12);color:#00c853;font-size:8px;font-family:Inter,sans-serif;padding:2px 7px;border-radius:100px;border:1px solid rgba(0,200,83,0.3);flex-shrink:0;margin-left:8px;">Muhim</span>
+        </div>
+        <div style="color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;margin-bottom:5px;">Barcha xodimlar uchun majburiy tadbirga taklif…</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">Admin · 2s oldin</div>
+      </div>
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:10px 12px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px;">
+          <div style="color:white;font-size:11px;font-weight:600;font-family:Inter,sans-serif;flex:1;">Yangi Safety moduli qo'shildi</div>
+          <span style="background:rgba(0,200,83,0.12);color:#00c853;font-size:8px;font-family:Inter,sans-serif;padding:2px 7px;border-radius:100px;border:1px solid rgba(0,200,83,0.3);flex-shrink:0;margin-left:8px;">Yangi</span>
+        </div>
+        <div style="color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;margin-bottom:5px;">2026-yil Safety protokollari bo'yicha yangi modul…</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">Admin · 1k oldin</div>
+      </div>
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:10px 12px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px;">
+          <div style="color:white;font-size:11px;font-weight:600;font-family:Inter,sans-serif;flex:1;">Oy xodimi — Sardor Mirzayev</div>
+          
+        </div>
+        <div style="color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;margin-bottom:5px;">May oyining eng faol xodimi tanlab olindi…</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">Admin · 3k oldin</div>
+      </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        07 — TAKLIFLAR
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Xodim Takliflari</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Xodimlar o'z fikr va takliflarini yuborishlari mumkin. Ovoz berish imkoni mavjud. Admin barcha takliflarni ko'rib chiqadi.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Taklif yuborish</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Ovoz berish</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Admin review</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Feedback loop</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">07 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Internal Portal</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Home</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Dashboard</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Suggestions</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Knowledge Base</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">AI Assistant</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Settings</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 16px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;justify-content:between;flex-shrink:0;">
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div style="width:28px;height:28px;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;"><span style="color:#00c853;font-size:13px;">💡</span></div>
+    <div>
+      <div style="color:white;font-size:12px;font-weight:600;font-family:Inter,sans-serif;">Takliflar</div>
+    </div>
+  </div>
+</div>
+  <div style="flex:1;overflow:hidden;padding:12px;display:flex;flex-direction:column;gap:8px;">
+    <!-- compose -->
+    <div style="background:rgba(0,200,83,0.05);border:1px solid rgba(0,200,83,0.25);border-radius:10px;padding:10px;">
+      <div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;margin-bottom:8px;">Yangi taklif yuborish</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Taklifingiz sarlavhasi…</div>
+        <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;height:40px;">Batafsil tushuntirish…</div>
+        <div style="background:#00c853;border-radius:8px;padding:9px 16px;text-align:center;color:white;font-weight:600;font-size:12px;font-family:Inter,sans-serif;cursor:pointer;">Yuborish</div>
+      </div>
+    </div>
+    <!-- existing -->
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">Kantina menyusini onlayn ko'rish</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;margin-top:2px;">Jasur K. · 2s oldin</div></div>
+      <div style="color:#00c853;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">👍 6 ovoz</div>
+    </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">Chorshanba sport kuni bo'lsin</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;margin-top:2px;">Sardor M. · 1k oldin</div></div>
+      <div style="color:#00c853;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">👍 14 ovoz</div>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        08 — BILIM BAZASI
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Knowledge Base</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Kompaniya ichki hujjatlari, qo'llanmalar va resurslar markazlashgan ko'rinishda. Kategoriyalar bo'yicha qidirish imkoni mavjud.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Internal docs</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Search</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Categories</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Always available</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">08 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Internal Portal</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Home</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Dashboard</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Suggestions</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Knowledge Base</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">AI Assistant</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Settings</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 16px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;justify-content:between;flex-shrink:0;">
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div style="width:28px;height:28px;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;"><span style="color:#00c853;font-size:13px;">📚</span></div>
+    <div>
+      <div style="color:white;font-size:12px;font-weight:600;font-family:Inter,sans-serif;">Bilim Bazasi</div>
+    </div>
+  </div>
+</div>
+  <div style="flex:1;overflow:hidden;padding:12px;display:flex;flex-direction:column;gap:8px;">
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+      <span style="color:rgba(255,255,255,0.22);font-size:12px;">🔍</span>
+      <span style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;">Maqola qidirish…</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;flex-shrink:0;">
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+        <div style="font-size:18px;">📋</div>
+        <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">ELD Qoidalari</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">12 maqola</div></div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+        <div style="font-size:18px;">🚗</div>
+        <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">Haydovchilik</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">8 maqola</div></div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+        <div style="font-size:18px;">⚠️</div>
+        <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">Safety</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">15 maqola</div></div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+        <div style="font-size:18px;">📊</div>
+        <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">Hisobotlar</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">6 maqola</div></div>
+      </div>
+    </div>
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">ELD Log kiritish qoidalari</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">ELD · 3 daqiqa o'qish</div></div>
+      <span style="color:#00c853;font-size:12px;">›</span>
+    </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">HOS (Hours of Service) hisoblash</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">Safety · 5 daqiqa o'qish</div></div>
+      <span style="color:#00c853;font-size:12px;">›</span>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        09 — AI YORDAMCHI
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">AI Assistant</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">OpenAI GPT-4o-mini asosida ishlaydi. Xodim ELD, HOS, yuk tashish va boshqa savollarga javob olishi mumkin. Typing animatsiya bilan.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">GPT-4o-mini</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Real responses</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Typing dots</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Suggestion chips</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">09 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Internal Portal</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Home</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Dashboard</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Suggestions</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Knowledge Base</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">AI Assistant</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Settings</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 14px;border-bottom:1px solid rgba(0,200,83,0.2);flex-shrink:0;display:flex;align-items:center;gap:8px;">
+    <div style="width:28px;height:28px;background:#00c853;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;">🤖</div>
+    <div><div style="color:white;font-size:11px;font-weight:600;font-family:Inter,sans-serif;">AI Yordamchi</div><div style="display:flex;align-items:center;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:#00c853;"></div><div style="color:#00c853;font-size:8.5px;font-family:Inter,sans-serif;">Online · AI Assistant</div></div></div>
+  </div>
+  <div style="flex:1;overflow:hidden;padding:12px;display:flex;flex-direction:column;gap:8px;">
+    <!-- bot message -->
+    <div style="display:flex;gap:7px;align-items:flex-start;">
+      <div style="width:22px;height:22px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px;">🤖</div>
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:8px 11px;font-size:10px;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif;line-height:1.5;max-width:80%;">Salom! Men ALGO Group AI Yordamchisiman. ELD, HOS, yuk tashish va boshqa savollarga javob beraman.</div>
+    </div>
+    <!-- user message -->
+    <div style="display:flex;justify-content:flex-end;">
+      <div style="background:#00c853;border-radius:10px;padding:8px 11px;font-size:10px;color:white;font-family:Inter,sans-serif;max-width:70%;">HOS qoidalari nima?</div>
+    </div>
+    <!-- bot response -->
+    <div style="display:flex;gap:7px;align-items:flex-start;">
+      <div style="width:22px;height:22px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;">🤖</div>
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:8px 11px;font-size:10px;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif;line-height:1.5;max-width:80%;">HOS (Hours of Service) — 11 soat haydash, 14 soatlik ish oynasi, 30 daqiqa tanaffus va 10 soat majburiy dam olish qoidalari.</div>
+    </div>
+  </div>
+  <div style="padding:8px 12px;border-top:1px solid rgba(0,200,83,0.2);display:flex;gap:8px;flex-shrink:0;">
+    <div style="flex:1;background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:7px 12px;font-size:10px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Savol bering…</div>
+    <div style="width:30px;height:30px;background:#00c853;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;">➤</div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        10 — SOZLAMALAR
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Shaxsiy Sozlamalar</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Xodim o'z profil ma'lumotlarini tahrirlaydi: ism, email, parol. Departament ma'lumotlari va interfeys afzalliklari.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Profile edit</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Password change</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Department</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Preferences</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">10 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Internal Portal</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Home</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Dashboard</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Suggestions</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Knowledge Base</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">AI Assistant</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Settings</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 16px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;justify-content:between;flex-shrink:0;">
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div style="width:28px;height:28px;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;"><span style="color:#00c853;font-size:13px;">⚙️</span></div>
+    <div>
+      <div style="color:white;font-size:12px;font-weight:600;font-family:Inter,sans-serif;">Sozlamalar</div>
+    </div>
+  </div>
+</div>
+  <div style="flex:1;overflow:hidden;padding:14px;display:flex;flex-direction:column;gap:10px;">
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:12px;">
+      <div style="color:#00c853;font-size:9px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;">👤 Profil Ma'lumotlari</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div><div style="color:rgba(255,255,255,0.45);font-size:8.5px;font-family:Inter,sans-serif;margin-bottom:3px;">ISM</div><div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif;">Jasur</div></div>
+        <div><div style="color:rgba(255,255,255,0.45);font-size:8.5px;font-family:Inter,sans-serif;margin-bottom:3px;">FAMILIYA</div><div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif;">Karimov</div></div>
+      </div>
+      <div style="margin-bottom:8px;"><div style="color:rgba(255,255,255,0.45);font-size:8.5px;font-family:Inter,sans-serif;margin-bottom:3px;">EMAIL</div><div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif;">jasur@algogroup.us</div></div>
+      <div style="color:rgba(255,255,255,0.45);font-size:8.5px;font-family:Inter,sans-serif;margin-bottom:3px;">DEPARTAMENT</div>
+      <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.7);font-family:Inter,sans-serif;">ELD Division</div>
+    </div>
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:12px;">
+      <div style="color:#00c853;font-size:9px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;">🔐 Parolni O'zgartirish</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Joriy parol</div>
+        <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Yangi parol</div>
+        <div style="width:120px;"><div style="background:#00c853;border-radius:6px;padding:5px 12px;text-align:center;color:white;font-weight:600;font-size:10px;font-family:Inter,sans-serif;cursor:pointer;">Saqlash</div></div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        11 — ADMIN · E'LONLAR
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Admin E'lonlar Boshqaruvi</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Admin yangi e'lon yaratadi, tahrirlaydi va o'chiradi. Barcha xodimlarga Socket.io orqali darhol yetkaziladi. To'liq CRUD operatsiyalar.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Create</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Edit</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Delete</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Real-time broadcast</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">11 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Admin Panel</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Spotlight</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Users</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Media</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 14px;border-bottom:1px solid rgba(0,200,83,0.2);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;">
+    <div style="color:white;font-size:12px;font-weight:700;font-family:Inter,sans-serif;">Admin · E'lonlar Boshqaruvi</div>
+    <div style="background:#00c853;border-radius:6px;padding:5px 12px;color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">+ Yangi E'lon</div>
+  </div>
+  <div style="flex:1;overflow:hidden;padding:12px;">
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 80px;padding:7px 12px;border-bottom:1px solid rgba(0,200,83,0.2);background:rgba(0,200,83,0.05);">
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">SARLAVHA</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">MU'ALLIF</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">SANA</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">AMALLAR</div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 80px;padding:8px 12px;border-bottom:1px solid rgba(0,200,83,0.07);align-items:center;">
+        <div style="color:rgba(255,255,255,0.85);font-size:10px;font-family:Inter,sans-serif;font-weight:500;">Korporativ bayram — 15-may</div>
+        <div style="color:rgba(255,255,255,0.45);font-size:9.5px;font-family:Inter,sans-serif;">Admin</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:9px;font-family:Inter,sans-serif;">14.05.2026</div>
+        <div style="display:flex;gap:5px;"><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">✏️</div><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🗑️</div></div>
+      </div><div style="display:grid;grid-template-columns:2fr 1fr 1fr 80px;padding:8px 12px;border-bottom:1px solid rgba(0,200,83,0.07);align-items:center;">
+        <div style="color:rgba(255,255,255,0.85);font-size:10px;font-family:Inter,sans-serif;font-weight:500;">Yangi modul qo'shildi</div>
+        <div style="color:rgba(255,255,255,0.45);font-size:9.5px;font-family:Inter,sans-serif;">Admin</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:9px;font-family:Inter,sans-serif;">13.05.2026</div>
+        <div style="display:flex;gap:5px;"><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">✏️</div><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🗑️</div></div>
+      </div><div style="display:grid;grid-template-columns:2fr 1fr 1fr 80px;padding:8px 12px;border-bottom:1px solid rgba(0,200,83,0.07);align-items:center;">
+        <div style="color:rgba(255,255,255,0.85);font-size:10px;font-family:Inter,sans-serif;font-weight:500;">Oy xodimi tanlandi</div>
+        <div style="color:rgba(255,255,255,0.45);font-size:9.5px;font-family:Inter,sans-serif;">Admin</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:9px;font-family:Inter,sans-serif;">12.05.2026</div>
+        <div style="display:flex;gap:5px;"><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">✏️</div><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🗑️</div></div>
+      </div><div style="display:grid;grid-template-columns:2fr 1fr 1fr 80px;padding:8px 12px;border-bottom:1px solid rgba(0,200,83,0.07);align-items:center;">
+        <div style="color:rgba(255,255,255,0.85);font-size:10px;font-family:Inter,sans-serif;font-weight:500;">Safety o'qitish — 20-may</div>
+        <div style="color:rgba(255,255,255,0.45);font-size:9.5px;font-family:Inter,sans-serif;">Admin</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:9px;font-family:Inter,sans-serif;">11.05.2026</div>
+        <div style="display:flex;gap:5px;"><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">✏️</div><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🗑️</div></div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        12 — ADMIN · SPOTLIGHT
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Oy Xodimi — Spotlight</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Admin har oyda eng yaxshi xodimni tanlaydi va e'lon qiladi. Dashboard'da ko'rsatiladi. Jamoa motivatsiyasi uchun muhim vosita.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Employee of month</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Description</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Monthly reset</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Dashboard</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">12 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Admin Panel</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Spotlight</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Users</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Media</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 14px;border-bottom:1px solid rgba(0,200,83,0.2);flex-shrink:0;">
+    <div style="color:white;font-size:12px;font-weight:700;font-family:Inter,sans-serif;">Admin · Oy Xodimi (Spotlight)</div>
+  </div>
+  <div style="flex:1;overflow:hidden;padding:14px;display:flex;gap:14px;">
+    <!-- current -->
+    <div style="flex:1;background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.3);border-radius:10px;padding:14px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+      <div style="font-size:11px;color:#00c853;font-weight:600;font-family:Inter,sans-serif;margin-bottom:10px;">⭐ Joriy Oy Xodimi</div>
+      <div style="width:52px;height:52px;border-radius:50%;background:rgba(0,200,83,0.2);border:2px solid #00c853;display:flex;align-items:center;justify-content:center;font-size:22px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;margin-bottom:8px;">S</div>
+      <div style="color:white;font-size:13px;font-weight:700;font-family:Inter,sans-serif;">Sardor Mirzayev</div>
+      <div style="color:rgba(255,255,255,0.45);font-size:9.5px;font-family:Inter,sans-serif;margin-top:2px;">ELD Division · May 2026</div>
+      <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;margin-top:8px;line-height:1.5;">Eng yuqori natija va jamoa ruhi uchun tanlandi</div>
+    </div>
+    <!-- form -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+      <div style="color:#00c853;font-size:9px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;">Yangi Spotlight Belgilash</div>
+      <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Xodim tanlang...</div>
+      <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;height:50px;">Sabab va tavsif…</div>
+      <div style="background:rgba(0,30,10,0.6);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.22);font-family:Inter,sans-serif;">Oy tanlang...</div>
+      <div style="background:#00c853;border-radius:8px;padding:9px 16px;text-align:center;color:white;font-weight:600;font-size:12px;font-family:Inter,sans-serif;cursor:pointer;">Spotlightni saqlash</div>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        13 — ADMIN · FOYDALANUVCHILAR
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Foydalanuvchilar Boshqaruvi</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Barcha xodimlar ro'yxati: ism, email, departament, rol. Pending accountlarni tasdiqlash yoki rad etish. To'liq CRUD operatsiyalar.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Approve/Reject</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Role mgmt</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Department filter</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">CRUD</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">13 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Admin Panel</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Spotlight</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Users</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Media</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 14px;border-bottom:1px solid rgba(0,200,83,0.2);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;">
+    <div style="color:white;font-size:12px;font-weight:700;font-family:Inter,sans-serif;">Admin · Foydalanuvchilar</div>
+    <div style="background:#00c853;border-radius:6px;padding:5px 12px;color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">+ Xodim qo'shish</div>
+  </div>
+  <div style="flex:1;overflow:hidden;padding:10px;">
+    <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:10px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 70px 90px;padding:7px 12px;border-bottom:1px solid rgba(0,200,83,0.2);background:rgba(0,200,83,0.05);">
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">ISM</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">EMAIL</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">BOʻLIM</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">ROL</div><div style="color:rgba(255,255,255,0.22);font-size:8px;font-weight:600;font-family:Inter,sans-serif;letter-spacing:.1em;">AMALLAR</div>
+      </div>
+      
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 70px 90px;padding:7px 12px;border-bottom:1px solid rgba(0,200,83,0.07);align-items:center;">
+          <div style="color:rgba(255,255,255,0.85);font-size:10px;font-family:Inter,sans-serif;font-weight:500;">Jasur Karimov</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">jasur@algo…</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">ELD</div>
+          <div><span style="display:inline-block;padding:2px 8px;border-radius:100px;background:#00c85322;color:#00c853;font-size:9px;font-family:Inter,sans-serif;font-weight:600;">member</span></div>
+          <div style="display:flex;gap:4px;"><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">✏️</div><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🗑️</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 70px 90px;padding:7px 12px;border-bottom:1px solid rgba(0,200,83,0.07);align-items:center;">
+          <div style="color:rgba(255,255,255,0.85);font-size:10px;font-family:Inter,sans-serif;font-weight:500;">Sardor Mirzayev</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">sardor@algo…</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">ELD</div>
+          <div><span style="display:inline-block;padding:2px 8px;border-radius:100px;background:#00c85322;color:#00c853;font-size:9px;font-family:Inter,sans-serif;font-weight:600;">member</span></div>
+          <div style="display:flex;gap:4px;"><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">✏️</div><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🗑️</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 70px 90px;padding:7px 12px;border-bottom:1px solid rgba(0,200,83,0.07);align-items:center;">
+          <div style="color:rgba(255,255,255,0.85);font-size:10px;font-family:Inter,sans-serif;font-weight:500;">Gulnora Saidova</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">gulnora@algo…</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">Safety</div>
+          <div><span style="display:inline-block;padding:2px 8px;border-radius:100px;background:#00c85322;color:#00c853;font-size:9px;font-family:Inter,sans-serif;font-weight:600;">member</span></div>
+          <div style="display:flex;gap:4px;"><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">✏️</div><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🗑️</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 70px 90px;padding:7px 12px;border-bottom:1px solid rgba(0,200,83,0.07);align-items:center;">
+          <div style="color:rgba(255,255,255,0.85);font-size:10px;font-family:Inter,sans-serif;font-weight:500;">Bobur Rahimov</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">bobur@algo…</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:9px;font-family:Inter,sans-serif;">Sales</div>
+          <div><span style="display:inline-block;padding:2px 8px;border-radius:100px;background:#00c85322;color:#00c853;font-size:9px;font-family:Inter,sans-serif;font-weight:600;">member</span></div>
+          <div style="display:flex;gap:4px;"><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">✏️</div><div style="border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:5px 12px;text-align:center;color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">🗑️</div></div>
+        </div>
+    </div>
+    <!-- pending -->
+    <div style="margin-top:8px;background:rgba(255,200,0,0.05);border:1px solid rgba(255,200,0,0.2);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;">
+      <div><div style="color:rgba(255,220,0,0.9);font-size:10px;font-weight:600;font-family:Inter,sans-serif;">⏳ Pending: Akbar Nazarov</div><div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;">Safety · 14.05.2026</div></div>
+      <div style="display:flex;gap:6px;"><div style="background:rgba(0,200,83,0.2);border:1px solid #00c853;border-radius:6px;padding:4px 10px;color:#00c853;font-size:9px;font-family:Inter,sans-serif;">✓ Tasdiqlash</div><div style="background:rgba(255,80,80,0.15);border:1px solid rgba(255,80,80,0.4);border-radius:6px;padding:4px 10px;color:#ff6b6b;font-size:9px;font-family:Inter,sans-serif;">✗ Rad</div></div>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <!-- ambient glow -->
+    <div style="position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,83,0.04),transparent 70%);pointer-events:none;"></div>
+
+    <!-- left panel -->
+    <div style="width:440px;flex-shrink:0;padding:60px 50px 50px 60px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;position:relative;">
+      <div style="color:#00c853;font-size:10px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;opacity:.8;">
+        14 — ADMIN · MEDIA
+      </div>
+      <h1 style="color:white;font-size:38px;font-weight:800;font-family:Inter,sans-serif;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em;">Media Boshqaruvi</h1>
+      <p style="color:rgba(255,255,255,0.45);font-size:13.5px;font-family:Inter,sans-serif;line-height:1.7;margin:0 0 32px;">Platforma uchun rasm, hujjat va video fayllarni yuklash va boshqarish. Drag-and-drop yuklash. Barcha media markazlashgan bir joyda.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">File upload</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Drag & drop</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Image/PDF/Video</span><span style="display:inline-block;padding:5px 13px;border-radius:100px;border:1px solid #00c853;color:#00c853;font-size:11.5px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:.02em;">Centralized</span></div>
+      <!-- slide counter -->
+      <div style="position:absolute;top:28px;right:32px;color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;letter-spacing:.08em;">14 / 15</div>
+    </div>
+
+    <!-- right panel -->
+    <div style="flex:1;padding:40px 50px 40px 20px;display:flex;align-items:center;box-sizing:border-box;">
+      
+  <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;overflow:hidden;width:100%;height:380px;display:flex;box-shadow:0 0 60px rgba(0,200,83,0.08);">
+    <div style="width:155px;flex-shrink:0;background:rgba(0,8,2,0.97);border-right:1px solid rgba(0,200,83,0.2);display:flex;flex-direction:column;height:100%;box-sizing:border-box;">
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(0,200,83,0.2);display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#00c853;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:11px;font-family:Inter,sans-serif;flex-shrink:0;">A</div>
+      <div><div style="color:white;font-size:9px;font-weight:600;font-family:Inter,sans-serif;">ALGO Group</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">Admin Panel</div></div>
+    </div>
+    <div style="padding:6px;flex:1;overflow:hidden;">
+      <div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Announcements</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Spotlight</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:400;color:rgba(255,255,255,0.45);background:transparent;border-left:2px solid transparent;margin-bottom:1px;">Users</div><div style="padding:6px 8px;border-radius:6px;font-size:9.5px;font-family:Inter,sans-serif;font-weight:600;color:#00c853;background:rgba(0,200,83,0.12);border-left:2px solid #00c853;margin-bottom:1px;">Media</div>
+    </div>
+    <div style="padding:8px;border-top:1px solid rgba(0,200,83,0.2);">
+      <div style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:6px;">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(0,200,83,0.2);border:1px solid rgba(0,200,83,0.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00c853;font-weight:700;font-family:Inter,sans-serif;flex-shrink:0;">J</div>
+        <div><div style="color:white;font-size:9px;font-family:Inter,sans-serif;font-weight:500;">Jasur K.</div><div style="color:rgba(255,255,255,0.22);font-size:7.5px;font-family:Inter,sans-serif;">ELD · Member</div></div>
+      </div>
+    </div>
+  </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;background:#040d06;">
+      
+  <div style="padding:10px 14px;border-bottom:1px solid rgba(0,200,83,0.2);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;">
+    <div style="color:white;font-size:12px;font-weight:700;font-family:Inter,sans-serif;">Admin · Media Boshqaruvi</div>
+    <div style="background:#00c853;border-radius:6px;padding:5px 12px;color:white;font-size:10px;font-weight:600;font-family:Inter,sans-serif;">+ Fayl Yuklash</div>
+  </div>
+  <div style="flex:1;overflow:hidden;padding:12px;">
+    <div style="background:rgba(0,200,83,0.03);border:2px dashed rgba(0,200,83,0.25);border-radius:10px;padding:16px;text-align:center;margin-bottom:10px;">
+      <div style="font-size:22px;margin-bottom:5px;">📁</div>
+      <div style="color:rgba(255,255,255,0.45);font-size:10px;font-family:Inter,sans-serif;">Fayl tashlab qo'ying yoki <span style="color:#00c853;">tanlang</span></div>
+      <div style="color:rgba(255,255,255,0.22);font-size:8.5px;font-family:Inter,sans-serif;margin-top:3px;">PNG, JPG, PDF, MP4 — max 50MB</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+      <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">🖼️</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:8.5px;font-family:Inter,sans-serif;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">banner-may.png</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">2.1 MB</div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">📄</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:8.5px;font-family:Inter,sans-serif;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">onboarding.pdf</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">0.8 MB</div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">🖼️</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:8.5px;font-family:Inter,sans-serif;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">team-photo.jpg</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">3.4 MB</div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">📄</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:8.5px;font-family:Inter,sans-serif;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">eld-guide.pdf</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">1.2 MB</div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">🎬</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:8.5px;font-family:Inter,sans-serif;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">welcome.mp4</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">12 MB</div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">🖼️</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:8.5px;font-family:Inter,sans-serif;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">logo-hd.png</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">0.3 MB</div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">📄</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:8.5px;font-family:Inter,sans-serif;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">safety-rules.pdf</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">0.6 MB</div>
+      </div><div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:8px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">🖼️</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:8.5px;font-family:Inter,sans-serif;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">office.jpg</div>
+        <div style="color:rgba(255,255,255,0.22);font-size:8px;font-family:Inter,sans-serif;">1.9 MB</div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(0,200,83,0.05),transparent 65%);pointer-events:none;"></div>
+    <div style="color:#00c853;font-size:11px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;opacity:.7;">TEXNOLOGIYALAR</div>
+    <h2 style="color:#00c853;font-size:42px;font-weight:800;font-family:Inter,sans-serif;margin:0 0 40px;letter-spacing:-.02em;">Tech Stack</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;width:900px;">
+      
+        <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">⚛️</div>
+          <div style="color:#00c853;font-size:12px;font-weight:700;font-family:Inter,sans-serif;margin-bottom:6px;">React 18 + Vite</div>
+          <div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;line-height:1.4;">Tez, zamonaviy frontend framework</div>
+        </div>
+        <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🟢</div>
+          <div style="color:#00c853;font-size:12px;font-weight:700;font-family:Inter,sans-serif;margin-bottom:6px;">Node.js + Express</div>
+          <div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;line-height:1.4;">REST API server, middleware</div>
+        </div>
+        <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🗄️</div>
+          <div style="color:#00c853;font-size:12px;font-weight:700;font-family:Inter,sans-serif;margin-bottom:6px;">Prisma + PostgreSQL</div>
+          <div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;line-height:1.4;">ORM va ma'lumotlar bazasi</div>
+        </div>
+        <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">⚡</div>
+          <div style="color:#00c853;font-size:12px;font-weight:700;font-family:Inter,sans-serif;margin-bottom:6px;">Socket.io v4</div>
+          <div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;line-height:1.4;">Real-time WebSocket aloqa</div>
+        </div>
+        <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🎨</div>
+          <div style="color:#00c853;font-size:12px;font-weight:700;font-family:Inter,sans-serif;margin-bottom:6px;">Tailwind CSS</div>
+          <div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;line-height:1.4;">Glass morfizm dizayn tizimi</div>
+        </div>
+        <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🤖</div>
+          <div style="color:#00c853;font-size:12px;font-weight:700;font-family:Inter,sans-serif;margin-bottom:6px;">OpenAI GPT-4o-mini</div>
+          <div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;line-height:1.4;">AI yordamchi engine</div>
+        </div>
+        <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🔐</div>
+          <div style="color:#00c853;font-size:12px;font-weight:700;font-family:Inter,sans-serif;margin-bottom:6px;">JWT Auth</div>
+          <div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;line-height:1.4;">Xavfsiz token autentifikatsiya</div>
+        </div>
+        <div style="background:rgba(0,18,6,0.85);border:1px solid rgba(0,200,83,0.2);border-radius:14px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🚀</div>
+          <div style="color:#00c853;font-size:12px;font-weight:700;font-family:Inter,sans-serif;margin-bottom:6px;">Railway</div>
+          <div style="color:rgba(255,255,255,0.22);font-size:10px;font-family:Inter,sans-serif;line-height:1.4;">GitHub CI/CD + avtomatik deploy</div>
+        </div>
+    </div>
+  </div>
+<div class="slide" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:1280px;height:720px;background:#030f05;box-sizing:border-box;overflow:hidden;position:relative;text-align:center;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(0,200,83,0.06),transparent 65%);pointer-events:none;"></div>
+    <div style="font-size:60px;margin-bottom:24px;">🎯</div>
+    <h1 style="color:white;font-size:52px;font-weight:800;font-family:Inter,sans-serif;margin:0 0 16px;">Rahmat!</h1>
+    <div style="width:60px;height:2px;background:linear-gradient(90deg,transparent,#00c853,transparent);margin:0 auto 24px;"></div>
+    <p style="color:rgba(255,255,255,0.45);font-size:15px;font-family:Inter,sans-serif;line-height:1.7;max-width:480px;margin:0 auto 36px;">ALGO Group Internal Portal — xodimlar uchun, xodimlar bilan yaratilgan korporativ platforma.</p>
+    <div style="color:#00c853;font-size:13px;font-family:Inter,sans-serif;font-weight:600;letter-spacing:.08em;">algogroup.railway.app</div>
+  </div>
+</body>
+</html>

@@ -91,3 +91,16 @@ model NewsPost {
   author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
 }
+
+model Startup {
+  id          Int      @id @default(autoincrement())
+  name        String
+  tagline     String?
+  description String
+  logoUrl     String?
+  stage       String   @default("Idea")
+  teamLead    String
+  website     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

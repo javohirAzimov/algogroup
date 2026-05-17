@@ -14,6 +14,7 @@ import Suggestions     from './pages/Suggestions'
 import KnowledgeBase   from './pages/KnowledgeBase'
 import AIAssistant     from './pages/AIAssistant'
 import Settings        from './pages/Settings'
+import StartUps        from './pages/StartUps'
 import Login           from './pages/Login'
 import Register        from './pages/Register'
 
@@ -21,6 +22,7 @@ import AdminAnnouncements from './pages/admin/AdminAnnouncements'
 import AdminSpotlight     from './pages/admin/AdminSpotlight'
 import AdminUsers         from './pages/admin/AdminUsers'
 import AdminMedia         from './pages/admin/AdminMedia'
+import AdminStartups      from './pages/admin/AdminStartups'
 
 export default function App() {
   return (
@@ -43,6 +45,7 @@ export default function App() {
                 <Route path="knowledge"     element={<KnowledgeBase />} />
                 <Route path="ai"            element={<AIAssistant />} />
                 <Route path="settings"      element={<Settings />} />
+                <Route path="startups"      element={<StartUps />} />
               </Route>
 
               {/* Admin panel */}
@@ -52,6 +55,7 @@ export default function App() {
                 <Route path="spotlight"     element={<AdminSpotlight />} />
                 <Route path="users"         element={<AdminUsers />} />
                 <Route path="media"         element={<AdminMedia />} />
+                <Route path="startups"      element={<AdminStartups />} />
               </Route>
             </Routes>
           </BrowserRouter>

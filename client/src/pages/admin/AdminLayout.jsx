@@ -1,12 +1,13 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Megaphone, Star, Users, ImageIcon, ArrowLeft, LogOut } from 'lucide-react'
+import { Megaphone, Star, Users, ImageIcon, ArrowLeft, LogOut, Rocket } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
 const links = [
-  { to: '/admin/announcements', icon: Megaphone,       label: 'Announcements' },
-  { to: '/admin/spotlight',     icon: Star,            label: 'Spotlight'     },
-  { to: '/admin/users',         icon: Users,           label: 'Users'         },
-  { to: '/admin/media',         icon: ImageIcon,       label: 'Media'         },
+  { to: '/admin/announcements', icon: Megaphone,  label: 'Announcements' },
+  { to: '/admin/spotlight',     icon: Star,        label: 'Spotlight'     },
+  { to: '/admin/users',         icon: Users,       label: 'Users'         },
+  { to: '/admin/media',         icon: ImageIcon,   label: 'Media'         },
+  { to: '/admin/startups',      icon: Rocket,      label: 'Start-Ups'     },
 ]
 
 export default function AdminLayout() {
