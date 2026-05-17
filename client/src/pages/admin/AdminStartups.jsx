@@ -4,7 +4,7 @@ import { getStartups, createStartup, updateStartup, deleteStartup } from '../../
 
 const STAGES = ['Idea', 'MVP', 'Growth', 'Scale']
 
-const EMPTY = { name: '', tagline: '', description: '', logoUrl: '', stage: 'Idea', teamLead: '', website: '' }
+const EMPTY = { name: '', tagline: '', description: '', logoUrl: '', stage: 'Idea', teamLead: '', department: '', website: '' }
 
 function StartupForm({ initial = EMPTY, onSave, onCancel, saving }) {
   const [form, setForm] = useState(initial)
@@ -34,16 +34,23 @@ function StartupForm({ initial = EMPTY, onSave, onCancel, saving }) {
                   className={`${inputCls} resize-none`} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="text-xs font-medium text-ink-muted mb-1 block">Team Lead *</label>
+          <input value={form.teamLead} onChange={set('teamLead')} placeholder="Full name" required className={inputCls} />
+        </div>
+        <div>
+          <label className="text-xs font-medium text-ink-muted mb-1 block">Department</label>
+          <input value={form.department} onChange={set('department')} placeholder="e.g. Operations" className={inputCls} />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="text-xs font-medium text-ink-muted mb-1 block">Stage</label>
           <select value={form.stage} onChange={set('stage')} className={inputCls}>
             {STAGES.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
-        </div>
-        <div>
-          <label className="text-xs font-medium text-ink-muted mb-1 block">Team Lead *</label>
-          <input value={form.teamLead} onChange={set('teamLead')} placeholder="Full name" required className={inputCls} />
         </div>
         <div>
           <label className="text-xs font-medium text-ink-muted mb-1 block">Website</label>
@@ -143,7 +150,8 @@ export default function AdminStartups() {
               {editId === s.id ? (
                 <StartupForm
                   initial={{ name: s.name, tagline: s.tagline || '', description: s.description,
-                             logoUrl: s.logoUrl || '', stage: s.stage, teamLead: s.teamLead, website: s.website || '' }}
+                             logoUrl: s.logoUrl || '', stage: s.stage, teamLead: s.teamLead,
+                             department: s.department || '', website: s.website || '' }}
                   onSave={(form) => handleUpdate(s.id, form)}
                   onCancel={() => setEditId(null)}
                   saving={saving}

@@ -100,6 +100,7 @@ model Startup {
   logoUrl     String?
   stage       String   @default("Idea")
   teamLead    String
+  department  String?
   website     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

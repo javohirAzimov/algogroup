@@ -46,7 +46,12 @@ function StartupCard({ startup, index }) {
         <div className="mt-4 pt-4 border-t border-edge flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <User size={11} className="text-ink-subtle" />
-            <span className="text-ink-subtle text-[11px]">{startup.teamLead}</span>
+            <div>
+              <span className="text-ink-subtle text-[11px]">{startup.teamLead}</span>
+              {startup.department && (
+                <span className="text-ink-subtle text-[10px] block leading-none mt-0.5 opacity-70">{startup.department}</span>
+              )}
+            </div>
           </div>
           {startup.website && (
             <a href={startup.website} target="_blank" rel="noopener noreferrer"
