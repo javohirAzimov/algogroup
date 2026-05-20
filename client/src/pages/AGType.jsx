@@ -156,10 +156,10 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
                 } else if (isPast && result) {
                   if (ci < result.typed.length) {
                     cls = result.typed[ci] === char
-                      ? 'text-brand/50'
-                      : 'text-danger/60'
+                      ? 'text-brand opacity-[0.55]'
+                      : 'text-danger opacity-[0.65]'
                   } else {
-                    cls = 'text-danger/40'
+                    cls = 'text-danger opacity-[0.45]'
                   }
                 } else {
                   cls = 'text-ink-subtle/30'
