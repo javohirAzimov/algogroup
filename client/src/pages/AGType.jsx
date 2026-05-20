@@ -109,7 +109,7 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
     const cRect = containerRef.current.getBoundingClientRect()
     const wRect = activeRef.current.getBoundingClientRect()
     const visibleTop = wRect.top - cRect.top
-    const LINE = 60
+    const LINE = 72
     setTranslateY(prev => {
       const actualTop = visibleTop + prev
       if (actualTop <= LINE / 2) return prev
@@ -124,12 +124,12 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
   return (
     <div
       ref={containerRef}
-      className="overflow-hidden h-[168px] relative cursor-text select-none"
+      className="overflow-hidden h-[220px] relative cursor-text select-none"
       onClick={onFocus}
     >
       <div
         ref={innerRef}
-        className="flex flex-wrap gap-x-3 gap-y-[18px] transition-transform duration-150 ease-out"
+        className="flex flex-wrap gap-x-4 gap-y-[24px] transition-transform duration-150 ease-out"
         style={{ transform: `translateY(-${translateY}px)` }}
       >
         {words.map((word, wi) => {
@@ -141,7 +141,7 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
             <span
               key={wi}
               ref={isActive ? activeRef : null}
-              className="relative inline-flex text-[22px] leading-none font-mono tracking-wide"
+              className="relative inline-flex text-[26px] leading-none font-mono tracking-wide"
             >
               {word.split('').map((char, ci) => {
                 let cls
@@ -500,7 +500,7 @@ export default function AGType() {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="space-y-6 max-w-4xl mx-auto"
+      className="space-y-6"
     >
       {/* ── Page header ── */}
       <div className="flex items-center gap-4">
@@ -602,7 +602,7 @@ export default function AGType() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="p-6 flex flex-col gap-5"
+              className="p-8 flex flex-col gap-6"
             >
               {/* Top bar: duration picker OR live stats */}
               {phase === 'idle' ? (
@@ -652,17 +652,6 @@ export default function AGType() {
                   onFocus={focusInput}
                 />
 
-                {/* "Click to start" overlay — idle only */}
-                {phase === 'idle' && (
-                  <div
-                    className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-transparent via-surface/60 to-surface/90 cursor-pointer"
-                    onClick={focusInput}
-                  >
-                    <p className="text-ink-muted text-sm select-none">
-                      Click here or start typing to begin…
-                    </p>
-                  </div>
-                )}
               </div>
 
               {/* Hidden input — captures all keystrokes */}
