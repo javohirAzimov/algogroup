@@ -156,10 +156,10 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
                 } else if (isPast && result) {
                   if (ci < result.typed.length) {
                     cls = result.typed[ci] === char
-                      ? 'text-ink/40'
-                      : 'text-danger/50'
+                      ? 'text-brand/50'
+                      : 'text-danger/60'
                   } else {
-                    cls = 'text-danger/30'
+                    cls = 'text-danger/40'
                   }
                 } else {
                   cls = 'text-ink-subtle/30'
@@ -301,8 +301,6 @@ function PersonalStats({ stats, loading }) {
           <PersonalStat icon="⚡" label="Personal Best" value={`${stats?.bestWpm ?? 0} WPM`} />
           <div className="hidden sm:block w-px bg-edge mx-6" />
           <PersonalStat icon="🎯" label="Avg Accuracy" value={`${stats?.avgAccuracy ?? 0}%`} />
-          <div className="hidden sm:block w-px bg-edge mx-6" />
-          <PersonalStat icon="🎮" label="Games Played" value={stats?.totalGames ?? 0} />
         </>
       )}
     </div>
