@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, LayoutDashboard, Megaphone, MessageSquare,
-  BookOpen, Bot, Settings, X, ShieldCheck, LogOut, Rocket,
+  BookOpen, Bot, Settings, X, ShieldCheck, LogOut, Rocket, Keyboard,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
@@ -14,6 +14,7 @@ const navItems = [
   { to: '/knowledge',     label: 'Knowledge Base', icon: BookOpen },
   { to: '/ai',            label: 'AI Assistant',   icon: Bot },
   { to: '/startups',      label: 'Start-Ups',      icon: Rocket },
+  { to: '/agtype',        label: 'AG Type',        icon: Keyboard },
   { to: '/settings',      label: 'Settings',       icon: Settings },
 ]
 

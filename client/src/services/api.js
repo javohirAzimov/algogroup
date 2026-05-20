@@ -53,6 +53,11 @@ export const createStartup  = (data) => api.post('/startups', data)
 export const updateStartup  = (id, data) => api.put(`/startups/${id}`, data)
 export const deleteStartup  = (id) => api.delete(`/startups/${id}`)
 
+// Typing / AG Type
+export const submitTypingScore      = (data) => api.post('/typing/scores', data)
+export const getTypingLeaderboard   = ()     => api.get('/typing/leaderboard')
+export const getMyTypingStats       = ()     => api.get('/typing/me')
+
 // Upload
 export const uploadFile             = (file) => {
   const form = new FormData()

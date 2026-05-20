@@ -15,6 +15,7 @@ import KnowledgeBase   from './pages/KnowledgeBase'
 import AIAssistant     from './pages/AIAssistant'
 import Settings        from './pages/Settings'
 import StartUps        from './pages/StartUps'
+import AGType          from './pages/AGType'
 import Login           from './pages/Login'
 import Register        from './pages/Register'
 
@@ -46,6 +47,7 @@ export default function App() {
                 <Route path="ai"            element={<AIAssistant />} />
                 <Route path="settings"      element={<Settings />} />
                 <Route path="startups"      element={<StartUps />} />
+                <Route path="agtype"        element={<AGType />} />
               </Route>
 
               {/* Admin panel */}

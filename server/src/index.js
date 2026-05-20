@@ -21,6 +21,7 @@ import aiRouter            from './routes/ai.js'
 import newsRouter          from './routes/news.js'
 import leaderboardRouter   from './routes/leaderboard.js'
 import startupsRouter      from './routes/startups.js'
+import typingRouter        from './routes/typing.js'
 import errorHandler        from './middleware/errorHandler.js'
 
 dotenv.config()
@@ -78,6 +79,7 @@ app.use('/api/ai',            aiRouter)
 app.use('/api/news',          newsRouter)
 app.use('/api/leaderboard',   leaderboardRouter)
 app.use('/api/startups',      startupsRouter)
+app.use('/api/typing',        typingRouter)
 
 app.use(errorHandler)
 
