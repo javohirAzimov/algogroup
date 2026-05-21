@@ -58,6 +58,18 @@ export const submitTypingScore      = (data) => api.post('/typing/scores', data)
 export const getTypingLeaderboard   = ()     => api.get('/typing/leaderboard')
 export const getMyTypingStats       = ()     => api.get('/typing/me')
 
+// Profile
+export const updateProfile          = (data) => api.patch('/profile/me', data)
+export const getUpcomingBirthdays   = ()     => api.get('/profile/upcoming-birthdays')
+
+// Birthday Wall
+export const getBirthdayMessages    = (userId) => api.get(`/birthdays/${userId}/messages`)
+export const postBirthdayMessage    = (userId, message) => api.post(`/birthdays/${userId}/messages`, { message })
+
+// Shoutouts
+export const getShoutouts           = ()     => api.get('/shoutouts')
+export const postShoutout           = (data) => api.post('/shoutouts', data)
+
 // Upload
 export const uploadFile             = (file) => {
   const form = new FormData()

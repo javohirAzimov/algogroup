@@ -61,5 +61,5 @@ export async function me(req, res, next) {
 }
 
 function safeUser(u) {
-  return { id: u.id, email: u.email, name: u.name, role: u.role, department: u.department, avatarUrl: u.avatarUrl, isActive: u.isActive, createdAt: u.createdAt }
+  return { id: u.id, email: u.email, name: u.name, role: u.role, department: u.department, avatarUrl: u.avatarUrl, birthday: u.birthday, isActive: u.isActive, createdAt: u.createdAt }
 }

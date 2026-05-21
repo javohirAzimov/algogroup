@@ -22,6 +22,9 @@ import newsRouter          from './routes/news.js'
 import leaderboardRouter   from './routes/leaderboard.js'
 import startupsRouter      from './routes/startups.js'
 import typingRouter        from './routes/typing.js'
+import profileRouter       from './routes/profile.js'
+import birthdaysRouter     from './routes/birthdays.js'
+import shoutoutsRouter     from './routes/shoutouts.js'
 import errorHandler        from './middleware/errorHandler.js'
 
 dotenv.config()
@@ -80,6 +83,9 @@ app.use('/api/news',          newsRouter)
 app.use('/api/leaderboard',   leaderboardRouter)
 app.use('/api/startups',      startupsRouter)
 app.use('/api/typing',        typingRouter)
+app.use('/api/profile',      profileRouter)
+app.use('/api/birthdays',    birthdaysRouter)
+app.use('/api/shoutouts',    shoutoutsRouter)
 
 app.use(errorHandler)
 

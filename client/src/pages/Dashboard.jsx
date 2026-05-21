@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import EmployeeOfMonth from '../components/dashboard/EmployeeOfMonth'
 import QueenOfMonth from '../components/dashboard/QueenOfMonth'
 import Leaderboard from '../components/dashboard/Leaderboard'
+import UpcomingBirthdays from '../components/dashboard/UpcomingBirthdays'
+import ShoutoutsFeed from '../components/dashboard/ShoutoutsFeed'
 import { getSpotlights } from '../services/api'
 
 export default function Dashboard() {
@@ -47,6 +49,23 @@ export default function Dashboard() {
           quote={queen?.quote || 'Bringing warmth, creativity, and energy to everything she touches.'}
           imageUrl={queen?.imageUrl}
         />
+      </div>
+
+      {/* Birthdays + Shoutouts */}
+      <div className="flex items-center gap-4 mb-7">
+        <div className="flex-1 divider-glow" />
+        <div className="flex items-center gap-2 px-3 py-1 rounded-full glass border border-edge">
+          <span className="text-base">🎂</span>
+          <span className="text-ink-subtle text-[10px] font-semibold uppercase tracking-[0.14em] whitespace-nowrap">
+            Birthdays & Shoutouts
+          </span>
+        </div>
+        <div className="flex-1 divider-glow" />
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 mb-8">
+        <UpcomingBirthdays />
+        <ShoutoutsFeed />
       </div>
 
       {/* Leaderboard divider */}

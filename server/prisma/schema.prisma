@@ -8,20 +8,25 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  email         String         @unique
-  password      String
-  name          String
-  role          String         @default("user") // "user" | "admin"
-  department    String?
-  avatarUrl     String?
-  isActive      Boolean        @default(true)
-  createdAt     DateTime       @default(now())
-  suggestions   Suggestion[]
-  announcements Announcement[]
-  chatMessages  ChatMessage[]
-  newsPosts     NewsPost[]
-  typingScores  TypingScore[]
+  id               Int               @id @default(autoincrement())
+  email            String            @unique
+  password         String
+  name             String
+  role             String            @default("user") // "user" | "admin"
+  department       String?
+  avatarUrl        String?
+  birthday         String?           // "MM-DD" e.g. "03-15"
+  isActive         Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  suggestions      Suggestion[]
+  announcements    Announcement[]
+  chatMessages     ChatMessage[]
+  newsPosts        NewsPost[]
+  typingScores     TypingScore[]
+  sentMessages     BirthdayMessage[] @relation("MessageSender")
+  receivedMessages BirthdayMessage[] @relation("MessageReceiver")
+  sentShoutouts    Shoutout[]        @relation("ShoutoutSender")
+  receivedShoutouts Shoutout[]       @relation("ShoutoutReceiver")
 }
 
 model Announcement {
@@ -116,5 +121,26 @@ model TypingScore {
   errors     Int
   duration   Int
   wordsTyped Int
+  createdAt  DateTime @default(now())
+}
+
+model BirthdayMessage {
+  id         Int      @id @default(autoincrement())
+  fromUserId Int
+  toUserId   Int
+  message    String
+  from       User     @relation("MessageSender",   fields: [fromUserId], references: [id])
+  to         User     @relation("MessageReceiver", fields: [toUserId],   references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model Shoutout {
+  id         Int      @id @default(autoincrement())
+  fromUserId Int
+  toUserId   Int
+  message    String
+  isBirthday Boolean  @default(false)
+  from       User     @relation("ShoutoutSender",   fields: [fromUserId], references: [id])
+  to         User     @relation("ShoutoutReceiver", fields: [toUserId],   references: [id])
   createdAt  DateTime @default(now())
 }
