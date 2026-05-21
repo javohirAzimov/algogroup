@@ -70,6 +70,15 @@ export const postBirthdayMessage    = (userId, message) => api.post(`/birthdays/
 export const getShoutouts           = ()     => api.get('/shoutouts')
 export const postShoutout           = (data) => api.post('/shoutouts', data)
 
+// Gamification
+export const getMyGamification      = ()     => api.get('/gamification/me')
+
+// Tournaments
+export const getTournaments         = ()     => api.get('/tournaments')
+export const joinTournament         = (id)   => api.post(`/tournaments/${id}/join`)
+export const createTournament       = (data) => api.post('/tournaments', data)
+export const deleteTournament       = (id)   => api.delete(`/tournaments/${id}`)
+
 // Upload
 export const uploadFile             = (file) => {
   const form = new FormData()

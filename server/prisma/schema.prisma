@@ -8,25 +8,30 @@ datasource db {
 }
 
 model User {
-  id               Int               @id @default(autoincrement())
-  email            String            @unique
-  password         String
-  name             String
-  role             String            @default("user") // "user" | "admin"
-  department       String?
-  avatarUrl        String?
-  birthday         String?           // "MM-DD" e.g. "03-15"
-  isActive         Boolean           @default(true)
-  createdAt        DateTime          @default(now())
-  suggestions      Suggestion[]
-  announcements    Announcement[]
-  chatMessages     ChatMessage[]
-  newsPosts        NewsPost[]
-  typingScores     TypingScore[]
-  sentMessages     BirthdayMessage[] @relation("MessageSender")
-  receivedMessages BirthdayMessage[] @relation("MessageReceiver")
-  sentShoutouts    Shoutout[]        @relation("ShoutoutSender")
-  receivedShoutouts Shoutout[]       @relation("ShoutoutReceiver")
+  id                Int               @id @default(autoincrement())
+  email             String            @unique
+  password          String
+  name              String
+  role              String            @default("user") // "user" | "admin"
+  department        String?
+  avatarUrl         String?
+  birthday          String?           // "MM-DD" e.g. "03-15"
+  isActive          Boolean           @default(true)
+  createdAt         DateTime          @default(now())
+  xp                Int               @default(0)
+  loginStreak       Int               @default(0)
+  lastLoginDate     String?           // "YYYY-MM-DD"
+  suggestions       Suggestion[]
+  announcements     Announcement[]
+  chatMessages      ChatMessage[]
+  newsPosts         NewsPost[]
+  typingScores      TypingScore[]
+  sentMessages      BirthdayMessage[] @relation("MessageSender")
+  receivedMessages  BirthdayMessage[] @relation("MessageReceiver")
+  sentShoutouts     Shoutout[]        @relation("ShoutoutSender")
+  receivedShoutouts Shoutout[]        @relation("ShoutoutReceiver")
+  badges            UserBadge[]
+  tournamentEntries TournamentEntry[]
 }
 
 model Announcement {
@@ -122,6 +127,50 @@ model TypingScore {
   duration   Int
   wordsTyped Int
   createdAt  DateTime @default(now())
+}
+
+model Badge {
+  id          Int         @id @default(autoincrement())
+  key         String      @unique
+  name        String
+  description String
+  icon        String
+  xpReward    Int         @default(0)
+  users       UserBadge[]
+}
+
+model UserBadge {
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  badgeId  Int
+  user     User     @relation(fields: [userId], references: [id])
+  badge    Badge    @relation(fields: [badgeId], references: [id])
+  earnedAt DateTime @default(now())
+
+  @@unique([userId, badgeId])
+}
+
+model Tournament {
+  id          Int               @id @default(autoincrement())
+  title       String
+  description String?
+  startAt     DateTime
+  endAt       DateTime
+  createdAt   DateTime          @default(now())
+  entries     TournamentEntry[]
+}
+
+model TournamentEntry {
+  id           Int        @id @default(autoincrement())
+  tournamentId Int
+  userId       Int
+  bestWpm      Int?
+  bestAccuracy Float?
+  submittedAt  DateTime?
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
+
+  @@unique([tournamentId, userId])
 }
 
 model BirthdayMessage {

@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client'
+import { awardXP, awardBadge } from '../utils/gamification.js'
+
 const prisma = new PrismaClient()
 
 export async function getShoutouts(req, res, next) {
@@ -39,6 +41,13 @@ export async function postShoutout(req, res, next) {
         to:   { select: { id: true, name: true, avatarUrl: true, department: true } },
       },
     })
+
+    // XP + shoutout_5 badge check
+    awardXP(req.user.id, 25).catch(() => {})
+    prisma.shoutout.count({ where: { fromUserId: req.user.id } }).then(total => {
+      if (total >= 5) awardBadge(req.user.id, 'shoutout_5').catch(() => {})
+    }).catch(() => {})
+
     res.status(201).json(shoutout)
   } catch (err) {
     next(err)

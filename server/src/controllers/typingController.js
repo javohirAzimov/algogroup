@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { awardXP, awardBadge } from '../utils/gamification.js'
 
 const prisma = new PrismaClient()
 
@@ -27,7 +28,6 @@ export async function submitScore(req, res, next) {
     if (!Number.isFinite(wordsTyped) || wordsTyped < 0)
       return res.status(400).json({ error: 'Invalid wordsTyped' })
 
-    // Anti-cheat: max words physically possible at MAX_WPM for given duration
     const maxWords = Math.ceil((MAX_WPM * duration) / 60)
     if (wordsTyped > maxWords)
       return res.status(400).json({ error: 'Score rejected: impossible stats' })
@@ -43,15 +43,45 @@ export async function submitScore(req, res, next) {
       },
     })
 
+    // XP + badges (fire-and-forget)
+    awardXP(userId, 10).catch(() => {})
+    if (wpm >= 150) awardBadge(userId, 'wpm_150').catch(() => {})
+    else if (wpm >= 100) awardBadge(userId, 'wpm_100').catch(() => {})
+
+    // typing_10 badge: check total games
+    prisma.typingScore.count({ where: { userId } }).then(total => {
+      if (total >= 10) awardBadge(userId, 'typing_10').catch(() => {})
+    }).catch(() => {})
+
+    // Auto-update active tournament entry if user is enrolled
+    updateTournamentEntry(userId, Math.round(wpm), Math.round(accuracy * 10) / 10).catch(() => {})
+
     res.status(201).json(score)
   } catch (err) { next(err) }
 }
 
+async function updateTournamentEntry(userId, wpm, accuracy) {
+  const now = new Date()
+  const active = await prisma.tournament.findFirst({
+    where: { startAt: { lte: now }, endAt: { gte: now } },
+  })
+  if (!active) return
+
+  const entry = await prisma.tournamentEntry.findUnique({
+    where: { tournamentId_userId: { tournamentId: active.id, userId } },
+  })
+  if (!entry) return
+
+  if (entry.bestWpm === null || wpm > entry.bestWpm) {
+    await prisma.tournamentEntry.update({
+      where: { tournamentId_userId: { tournamentId: active.id, userId } },
+      data:  { bestWpm: wpm, bestAccuracy: accuracy, submittedAt: now },
+    })
+  }
+}
+
 export async function getLeaderboard(_req, res, next) {
   try {
-    // Best score per user using DISTINCT ON (PostgreSQL)
-    // DISTINCT ON ("userId") ORDER BY "userId", wpm DESC gives max wpm per user
-    // Then we sort those by wpm desc and take top 10
     const rows = await prisma.$queryRaw`
       SELECT DISTINCT ON (ts."userId")
         ts.id,

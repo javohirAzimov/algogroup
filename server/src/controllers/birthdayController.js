@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client'
+import { awardXP, awardBadge } from '../utils/gamification.js'
+
 const prisma = new PrismaClient()
 
 export async function getBirthdayMessages(req, res, next) {
@@ -32,6 +34,11 @@ export async function postBirthdayMessage(req, res, next) {
       data: { fromUserId: req.user.id, toUserId, message: message.trim() },
       include: { from: { select: { id: true, name: true, avatarUrl: true, department: true } } },
     })
+
+    // XP + birthday_wisher badge
+    awardXP(req.user.id, 25).catch(() => {})
+    awardBadge(req.user.id, 'birthday_wisher').catch(() => {})
+
     res.status(201).json(msg)
   } catch (err) {
     next(err)

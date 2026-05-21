@@ -2,9 +2,10 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, LayoutDashboard, Megaphone, MessageSquare,
-  BookOpen, Bot, Settings, X, ShieldCheck, LogOut, Rocket, Keyboard,
+  BookOpen, Bot, Settings, X, ShieldCheck, LogOut, Rocket, Keyboard, Trophy, Medal,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import { computeLevel, levelBg } from '../../utils/levels'
 
 const navItems = [
   { to: '/home',          label: 'Home',           icon: Home },
@@ -15,6 +16,8 @@ const navItems = [
   { to: '/ai',            label: 'AI Assistant',   icon: Bot },
   { to: '/startups',      label: 'Start-Ups',      icon: Rocket },
   { to: '/agtype',        label: 'AG Type',        icon: Keyboard },
+  { to: '/tournaments',   label: 'Tournaments',    icon: Trophy },
+  { to: '/achievements',  label: 'Achievements',   icon: Medal },
   { to: '/settings',      label: 'Settings',       icon: Settings },
 ]
 
@@ -130,7 +133,19 @@ function SidebarShell({ onClose }) {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-ink text-xs font-medium truncate">{user?.name || 'User'}</p>
-            <p className="text-ink-subtle text-[11px] truncate">{user?.department || user?.role}</p>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              {user?.xp != null && (() => {
+                const { level, name } = computeLevel(user.xp)
+                return (
+                  <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold border ${levelBg(level)}`}>
+                    Lv.{level} · {name}
+                  </span>
+                )
+              })()}
+              {!user?.xp && (
+                <p className="text-ink-subtle text-[11px] truncate">{user?.department || user?.role}</p>
+              )}
+            </div>
           </div>
           <button
             onClick={handleLogout}

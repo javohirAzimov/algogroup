@@ -25,11 +25,34 @@ import typingRouter        from './routes/typing.js'
 import profileRouter       from './routes/profile.js'
 import birthdaysRouter     from './routes/birthdays.js'
 import shoutoutsRouter     from './routes/shoutouts.js'
+import gamificationRouter  from './routes/gamification.js'
+import tournamentsRouter   from './routes/tournaments.js'
 import errorHandler        from './middleware/errorHandler.js'
 
 dotenv.config()
 
 const prisma = new PrismaClient()
+
+const BADGE_DEFINITIONS = [
+  { key: 'first_login',      name: 'First Login',       description: 'Logged into the portal for the first time',    icon: '👋', xpReward: 50  },
+  { key: 'wpm_100',          name: 'Speed Demon',        description: 'Reached 100 WPM in AG Type',                   icon: '⚡', xpReward: 200 },
+  { key: 'wpm_150',          name: 'Blazing Fast',       description: 'Reached 150 WPM in AG Type',                   icon: '🔥', xpReward: 300 },
+  { key: 'login_streak_7',   name: 'Week Warrior',       description: 'Logged in 7 days in a row',                    icon: '🗓', xpReward: 150 },
+  { key: 'shoutout_5',       name: 'Team Spirit',        description: 'Sent 5 shoutouts to teammates',                icon: '📣', xpReward: 100 },
+  { key: 'birthday_wisher',  name: 'Birthday Buddy',     description: "Left a message on someone's birthday wall",    icon: '🎂', xpReward: 50  },
+  { key: 'typing_10',        name: 'Dedicated Typer',    description: 'Completed 10 typing tests',                    icon: '⌨',  xpReward: 75  },
+]
+
+async function ensureBadges() {
+  for (const badge of BADGE_DEFINITIONS) {
+    await prisma.badge.upsert({
+      where:  { key: badge.key },
+      update: { name: badge.name, description: badge.description, icon: badge.icon, xpReward: badge.xpReward },
+      create: badge,
+    })
+  }
+}
+ensureBadges().catch(err => console.error('Badge seed error:', err.message))
 
 async function ensureAdmin() {
   const exists = await prisma.user.findUnique({ where: { email: 'admin@algogroup.com' } })
@@ -83,9 +106,11 @@ app.use('/api/news',          newsRouter)
 app.use('/api/leaderboard',   leaderboardRouter)
 app.use('/api/startups',      startupsRouter)
 app.use('/api/typing',        typingRouter)
-app.use('/api/profile',      profileRouter)
-app.use('/api/birthdays',    birthdaysRouter)
-app.use('/api/shoutouts',    shoutoutsRouter)
+app.use('/api/profile',       profileRouter)
+app.use('/api/birthdays',     birthdaysRouter)
+app.use('/api/shoutouts',     shoutoutsRouter)
+app.use('/api/gamification',  gamificationRouter)
+app.use('/api/tournaments',   tournamentsRouter)
 
 app.use(errorHandler)
 
