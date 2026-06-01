@@ -1,11 +1,11 @@
 import {
   useState, useEffect, useRef, useCallback,
-  useMemo, useLayoutEffect,
+  useMemo, useLayoutEffect, memo,
 } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Keyboard, Trophy, RotateCcw, Loader2,
-  Crown, CheckCircle2, AlertCircle,
+  CheckCircle2, AlertCircle,
 } from 'lucide-react'
 import {
   submitTypingScore,
@@ -50,13 +50,10 @@ const WORD_POOL = [
   'must', 'break', 'run', 'age', 'set', 'change', 'once', 'tell', 'miss',
   'found', 'call', 'front', 'keep', 'land', 'side', 'night', 'eye',
   'never', 'same', 'below', 'show', 'put', 'cut', 'face', 'watch', 'far',
-  'Indian', 'real', 'almost', 'let', 'above', 'girl', 'sometimes', 'mountain',
-  'cut', 'young', 'talk', 'soon', 'list', 'song', 'being', 'leave', 'family',
-  'it', 'near', 'food', 'plant', 'light', 'voice', 'power', 'town', 'fine',
-  'drive', 'short', 'road', 'true', 'book', 'carry', 'took', 'science',
-  'eat', 'room', 'friend', 'began', 'idea', 'fish', 'mountain', 'north',
-  'once', 'base', 'hear', 'horse', 'cut', 'sure', 'watch', 'color', 'face',
-  'wood', 'main', 'open', 'seem', 'together', 'next', 'white', 'children',
+  'real', 'almost', 'let', 'sometimes', 'mountain', 'being', 'near',
+  'food', 'plant', 'light', 'fine', 'drive', 'book', 'carry', 'took',
+  'science', 'eat', 'room', 'friend', 'began', 'idea', 'fish', 'north',
+  'base', 'hear', 'horse', 'sure', 'color', 'wood', 'main', 'children',
 ]
 
 function generateWords(n = 200) {
@@ -96,14 +93,13 @@ function wordErrors(typed, target) {
   return e
 }
 
-// ── Word display ──────────────────────────────────────────────────────
-function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) {
+// ── Word display — memoized to prevent re-renders every timer tick ─────
+const WordDisplay = memo(function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) {
   const containerRef = useRef(null)
   const innerRef     = useRef(null)
   const activeRef    = useRef(null)
   const [translateY, setTranslateY] = useState(0)
 
-  // Scroll active word into first visible row
   useLayoutEffect(() => {
     if (!activeRef.current || !containerRef.current) return
     const cRect = containerRef.current.getBoundingClientRect()
@@ -133,9 +129,9 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
         style={{ transform: `translateY(-${translateY}px)` }}
       >
         {words.map((word, wi) => {
-          const isActive  = wi === wordIdx
-          const isPast    = wi < wordIdx
-          const result    = wordResults[wi]
+          const isActive = wi === wordIdx
+          const isPast   = wi < wordIdx
+          const result   = wordResults[wi]
 
           return (
             <span
@@ -147,9 +143,7 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
                 let cls
                 if (isActive) {
                   if (ci < inputVal.length) {
-                    cls = inputVal[ci] === char
-                      ? 'text-ink'
-                      : 'text-danger'
+                    cls = inputVal[ci] === char ? 'text-ink' : 'text-danger'
                   } else {
                     cls = 'text-ink-subtle'
                   }
@@ -177,14 +171,12 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
                 )
               })}
 
-              {/* Extra chars typed beyond word length */}
               {isActive && inputVal.length > word.length &&
                 inputVal.slice(word.length).split('').map((ch, ei) => (
                   <span key={`x${ei}`} className="text-danger/80">{ch}</span>
                 ))
               }
 
-              {/* Cursor at end of word */}
               {isActive && inputVal.length >= word.length && (
                 <span className="absolute -right-[3px] top-[-2px] bottom-[-2px] w-[2px] bg-brand animate-pulse rounded-full" />
               )}
@@ -194,7 +186,7 @@ function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) 
       </div>
     </div>
   )
-}
+})
 
 // ── Stats bar ─────────────────────────────────────────────────────────
 function StatItem({ label, value, highlight }) {
@@ -225,11 +217,7 @@ function DurationPill({ seconds, active, onClick }) {
 }
 
 // ── Leaderboard table ─────────────────────────────────────────────────
-const RANK_STYLE = {
-  1: 'text-yellow-400',
-  2: 'text-slate-300',
-  3: 'text-amber-600',
-}
+const RANK_STYLE = { 1: 'text-yellow-400', 2: 'text-slate-300', 3: 'text-amber-600' }
 
 function LeaderboardTable({ rows, loading }) {
   if (loading) {
@@ -239,7 +227,6 @@ function LeaderboardTable({ rows, loading }) {
       </div>
     )
   }
-
   if (!rows.length) {
     return (
       <div className="py-10 text-center text-ink-muted text-sm">
@@ -247,7 +234,6 @@ function LeaderboardTable({ rows, loading }) {
       </div>
     )
   }
-
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
@@ -262,22 +248,15 @@ function LeaderboardTable({ rows, loading }) {
         </thead>
         <tbody>
           {rows.map(row => (
-            <tr
-              key={row.userId}
-              className="border-b border-edge/50 hover:bg-white/[0.02] transition-colors"
-            >
+            <tr key={row.userId} className="border-b border-edge/50 hover:bg-white/[0.02] transition-colors">
               <td className="py-3 px-3">
                 <span className={`font-bold font-mono ${RANK_STYLE[row.rank] ?? 'text-ink-muted'}`}>
                   {row.rank <= 3 ? ['🥇', '🥈', '🥉'][row.rank - 1] : row.rank}
                 </span>
               </td>
-              <td className="py-3 px-3">
-                <span className="font-medium text-ink">{row.username}</span>
-              </td>
+              <td className="py-3 px-3"><span className="font-medium text-ink">{row.username}</span></td>
               <td className="py-3 px-3 text-ink-muted">{row.department}</td>
-              <td className="py-3 px-3">
-                <span className="font-bold text-brand font-mono">{row.wpm}</span>
-              </td>
+              <td className="py-3 px-3"><span className="font-bold text-brand font-mono">{row.wpm}</span></td>
               <td className="py-3 px-3 text-ink-muted font-mono">{row.accuracy}%</td>
               <td className="py-3 px-3 text-ink-subtle">{formatShortDate(row.date)}</td>
             </tr>
@@ -300,7 +279,7 @@ function PersonalStats({ stats, loading }) {
         <>
           <PersonalStat icon="⚡" label="Personal Best" value={`${stats?.bestWpm ?? 0} WPM`} />
           <div className="hidden sm:block w-px bg-edge mx-6" />
-          <PersonalStat icon="🎯" label="Avg Accuracy" value={`${stats?.avgAccuracy ?? 0}%`} />
+          <PersonalStat icon="🎯" label="Avg Accuracy"  value={`${stats?.avgAccuracy ?? 0}%`} />
         </>
       )}
     </div>
@@ -328,17 +307,18 @@ export default function AGType() {
   const [inputVal,    setInputVal]    = useState('')
   const [wordResults, setWordResults] = useState([])
   const [timeLeft,    setTimeLeft]    = useState(60)
-  const [startTime,   setStartTime]   = useState(null)
   const [finalStats,  setFinalStats]  = useState(null)
-  const [saveStatus,  setSaveStatus]  = useState('idle') // 'idle'|'saving'|'saved'|'error'
+  const [saveStatus,  setSaveStatus]  = useState('idle')
 
   const [leaderboard, setLeaderboard] = useState([])
   const [myStats,     setMyStats]     = useState(null)
   const [loadingLb,   setLoadingLb]   = useState(true)
   const [loadingMe,   setLoadingMe]   = useState(true)
 
-  const inputRef = useRef(null)
-  const timerRef = useRef(null)
+  const inputRef    = useRef(null)
+  const timerRef    = useRef(null)
+  // Ref tracks the actual start timestamp — reliable in all closures, no stale state
+  const startTimeRef = useRef(null)
 
   // ── Load remote data ──────────────────────────────────────────────
   const fetchLeaderboard = useCallback(() => {
@@ -377,28 +357,26 @@ export default function AGType() {
     return () => clearInterval(timerRef.current)
   }, [phase])
 
-  // End game when timer hits 0
   useEffect(() => {
-    if (phase === 'running' && timeLeft === 0) {
-      endGame()
-    }
+    if (phase === 'running' && timeLeft === 0) endGame()
   }, [timeLeft, phase]) // eslint-disable-line
 
-  // ── Live stats ────────────────────────────────────────────────────
+  // ── Live stats — only recalcs every second; WordDisplay is memoized
+  //    so the per-second re-render never touches the word DOM ──────────
   const liveStats = useMemo(() => {
-    if (phase === 'idle' || !startTime) return { wpm: 0, acc: 100, errors: 0 }
-    const elapsed = Date.now() - startTime
+    if (phase === 'idle' || !startTimeRef.current) return { wpm: 0, acc: 100, errors: 0 }
+    const elapsed = Date.now() - startTimeRef.current
     return {
       wpm:    calcWpm(wordResults, elapsed),
       acc:    calcAccuracy(wordResults),
       errors: wordResults.reduce((a, r) => a + r.errors, 0),
     }
-  }, [wordResults, timeLeft, phase, startTime]) // timeLeft triggers every second
+  }, [wordResults, timeLeft, phase]) // timeLeft keeps it updating every second
 
   // ── Game actions ──────────────────────────────────────────────────
   function startGame() {
+    startTimeRef.current = Date.now()
     setPhase('running')
-    setStartTime(Date.now())
   }
 
   function endGame() {
@@ -406,46 +384,41 @@ export default function AGType() {
     setPhase('finished')
 
     setWordResults(prev => {
-      const elapsed  = duration * 1000
+      // Use actual elapsed time from the ref — accurate regardless of which
+      // duration was selected, and immune to the stale-closure timer bug.
+      const elapsed = startTimeRef.current
+        ? Math.max(Date.now() - startTimeRef.current, 1000)
+        : duration * 1000
+
       const wpm      = calcWpm(prev, elapsed)
       const accuracy = calcAccuracy(prev)
       const errors   = prev.reduce((a, r) => a + r.errors, 0)
+      const stats    = { wpm, accuracy, errors, wordsTyped: prev.length, duration }
 
-      const stats = {
-        wpm,
-        accuracy,
-        errors,
-        wordsTyped: prev.length,
-        duration,
-      }
       setFinalStats(stats)
-
-      // Auto-save score
       setSaveStatus('saving')
       submitTypingScore(stats)
-        .then(() => {
-          setSaveStatus('saved')
-          fetchLeaderboard()
-          fetchMyStats()
-        })
+        .then(() => { setSaveStatus('saved'); fetchLeaderboard(); fetchMyStats() })
         .catch(() => setSaveStatus('error'))
 
       return prev
     })
   }
 
-  function restart() {
+  // restart wrapped in useCallback with duration dep so handleKeyDown
+  // always gets the current duration — fixes the stale-closure timer bug.
+  const restart = useCallback(() => {
     clearInterval(timerRef.current)
+    startTimeRef.current = null
     setPhase('idle')
     setWords(generateWords(200))
     setWordIdx(0)
     setInputVal('')
     setWordResults([])
-    setTimeLeft(duration)
-    setStartTime(null)
+    setTimeLeft(duration)   // always uses the CURRENT duration
     setFinalStats(null)
     setSaveStatus('idle')
-  }
+  }, [duration])
 
   function handleDurationChange(d) {
     if (phase !== 'idle') return
@@ -456,22 +429,15 @@ export default function AGType() {
   // ── Input handling ────────────────────────────────────────────────
   const handleInput = useCallback((e) => {
     if (phase === 'finished') return
-
     const val = e.target.value
-
-    // Start game on first character
-    if (phase === 'idle' && val.trim()) {
-      startGame()
-    }
+    if (phase === 'idle' && val.trim()) startGame()
 
     if (val.endsWith(' ')) {
       const typed = val.trimEnd()
       if (!typed) { setInputVal(''); return }
-
       const target  = words[wordIdx]
       const correct = typed === target
       const errors  = wordErrors(typed, target)
-
       setWordResults(prev => [...prev, { typed, target, correct, errors }])
       setWordIdx(prev => prev + 1)
       setInputVal('')
@@ -480,21 +446,19 @@ export default function AGType() {
     }
   }, [phase, words, wordIdx])
 
+  // handleKeyDown now depends on restart, so Tab/Esc always restart
+  // with the correct duration — no more stale-60s closure.
   const handleKeyDown = useCallback((e) => {
-    // Ctrl+R or Escape = restart
     if (e.key === 'Escape') { e.preventDefault(); restart() }
-    // Tab = restart (common typing test shortcut)
     if (e.key === 'Tab')    { e.preventDefault(); restart() }
-  }, []) // eslint-disable-line
+  }, [restart])
 
-  const focusInput = () => inputRef.current?.focus()
+  // Stable reference so WordDisplay memo doesn't break on every render
+  const focusInput = useCallback(() => inputRef.current?.focus(), [])
 
-  // Auto-focus on mount
-  useEffect(() => { focusInput() }, [])
+  useEffect(() => { focusInput() }, [focusInput])
 
   // ── Render ────────────────────────────────────────────────────────
-  const isFocused = phase !== 'finished'
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -527,7 +491,6 @@ export default function AGType() {
               transition={{ duration: 0.2 }}
               className="p-8 flex flex-col items-center gap-6"
             >
-              {/* Big WPM */}
               <div className="text-center">
                 <motion.p
                   initial={{ opacity: 0, y: 12 }}
@@ -540,20 +503,18 @@ export default function AGType() {
                 <p className="text-ink-subtle text-sm uppercase tracking-widest font-medium">words per minute</p>
               </div>
 
-              {/* Result stats row */}
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18 }}
                 className="flex gap-8"
               >
-                <StatItem label="Accuracy"   value={`${finalStats.accuracy}%`} />
-                <StatItem label="Errors"     value={finalStats.errors} />
-                <StatItem label="Words"      value={finalStats.wordsTyped} />
-                <StatItem label="Duration"   value={`${finalStats.duration}s`} />
+                <StatItem label="Accuracy" value={`${finalStats.accuracy}%`} />
+                <StatItem label="Errors"   value={finalStats.errors} />
+                <StatItem label="Words"    value={finalStats.wordsTyped} />
+                <StatItem label="Duration" value={`${finalStats.duration}s`} />
               </motion.div>
 
-              {/* Save indicator */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -561,40 +522,30 @@ export default function AGType() {
                 className="flex items-center gap-2 text-sm"
               >
                 {saveStatus === 'saving' && (
-                  <>
-                    <Loader2 size={14} className="text-brand animate-spin" />
-                    <span className="text-ink-muted">Saving to leaderboard…</span>
-                  </>
+                  <><Loader2 size={14} className="text-brand animate-spin" /><span className="text-ink-muted">Saving to leaderboard…</span></>
                 )}
                 {saveStatus === 'saved' && (
-                  <>
-                    <CheckCircle2 size={14} className="text-brand" />
-                    <span className="text-brand font-medium">Score saved!</span>
-                  </>
+                  <><CheckCircle2 size={14} className="text-brand" /><span className="text-brand font-medium">Score saved!</span></>
                 )}
                 {saveStatus === 'error' && (
-                  <>
-                    <AlertCircle size={14} className="text-danger" />
-                    <span className="text-danger">Failed to save score</span>
-                  </>
+                  <><AlertCircle size={14} className="text-danger" /><span className="text-danger">Failed to save score</span></>
                 )}
               </motion.div>
 
-              {/* Play again */}
               <motion.button
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
                 onClick={restart}
                 className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-brand/10 border border-brand/20
-                           text-brand font-medium hover:bg-brand/20 transition-colors"
+                           text-brand font-medium hover:bg-brand/20 transition-colors cursor-pointer"
               >
                 <RotateCcw size={15} />
                 Play Again
               </motion.button>
             </motion.div>
-          ) : (
 
+          ) : (
             /* IDLE / RUNNING — typing area */
             <motion.div
               key="game"
@@ -604,57 +555,71 @@ export default function AGType() {
               transition={{ duration: 0.15 }}
               className="p-8 flex flex-col gap-6"
             >
-              {/* Top bar: duration picker OR live stats */}
-              {phase === 'idle' ? (
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-1">
-                    {DURATIONS.map(d => (
-                      <DurationPill
-                        key={d}
-                        seconds={d}
-                        active={duration === d}
-                        onClick={() => handleDurationChange(d)}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-ink-subtle text-xs">Tab or Esc to restart</span>
-                </div>
-              ) : (
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-8">
-                    <StatItem label="WPM"      value={liveStats.wpm}    highlight />
-                    <StatItem label="Accuracy" value={`${liveStats.acc}%`} />
-                    <StatItem label="Errors"   value={liveStats.errors} />
-                  </div>
-                  {/* Timer */}
-                  <div className="flex flex-col items-end gap-0.5">
-                    <span className={`text-3xl font-black font-mono tabular-nums ${
-                      timeLeft <= 5 ? 'text-danger animate-pulse' : 'text-brand'
-                    }`}>
-                      {timeLeft}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-widest text-ink-subtle">sec</span>
-                  </div>
-                </div>
-              )}
+              {/* Top bar — fixed height so the layout never jumps on start */}
+              <div className="h-10 flex items-center">
+                <AnimatePresence mode="wait" initial={false}>
+                  {phase === 'idle' ? (
+                    <motion.div
+                      key="idle-bar"
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.15 }}
+                      className="flex items-center justify-between w-full"
+                    >
+                      <div className="flex gap-1">
+                        {DURATIONS.map(d => (
+                          <DurationPill
+                            key={d}
+                            seconds={d}
+                            active={duration === d}
+                            onClick={() => handleDurationChange(d)}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-ink-subtle text-xs">Tab or Esc to restart</span>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="running-bar"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ duration: 0.15 }}
+                      className="flex items-center justify-between w-full"
+                    >
+                      <div className="flex gap-8">
+                        <StatItem label="WPM"      value={liveStats.wpm}         highlight />
+                        <StatItem label="Accuracy" value={`${liveStats.acc}%`} />
+                        <StatItem label="Errors"   value={liveStats.errors} />
+                      </div>
+                      <div className="flex flex-col items-end gap-0.5">
+                        <span className={`text-3xl font-black font-mono tabular-nums ${
+                          timeLeft <= 5 ? 'text-danger animate-pulse' : 'text-brand'
+                        }`}>
+                          {timeLeft}
+                        </span>
+                        <span className="text-[10px] uppercase tracking-widest text-ink-subtle">sec</span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               {/* Divider */}
               <div className="divider-glow" />
 
-              {/* Words display */}
-              <div className="relative">
-                <WordDisplay
-                  words={words}
-                  wordIdx={wordIdx}
-                  inputVal={inputVal}
-                  wordResults={wordResults}
-                  phase={phase}
-                  onFocus={focusInput}
-                />
+              {/* Words display — memoized, never re-renders on timer ticks */}
+              <WordDisplay
+                words={words}
+                wordIdx={wordIdx}
+                inputVal={inputVal}
+                wordResults={wordResults}
+                phase={phase}
+                onFocus={focusInput}
+              />
 
-              </div>
-
-              {/* Hidden input — captures all keystrokes */}
+              {/* Hidden input */}
               <input
                 ref={inputRef}
                 value={inputVal}
@@ -668,11 +633,8 @@ export default function AGType() {
                 aria-label="typing input"
               />
 
-              {/* Restart hint during run */}
               {phase === 'running' && (
-                <p className="text-center text-ink-subtle text-xs">
-                  Tab · Esc to restart
-                </p>
+                <p className="text-center text-ink-subtle text-xs">Tab · Esc to restart</p>
               )}
             </motion.div>
           )}
@@ -694,7 +656,7 @@ export default function AGType() {
           </div>
           <button
             onClick={fetchLeaderboard}
-            className="ml-auto text-ink-subtle hover:text-ink transition-colors p-1.5 rounded-lg hover:bg-white/5"
+            className="ml-auto text-ink-subtle hover:text-ink transition-colors p-1.5 rounded-lg hover:bg-white/5 cursor-pointer"
             title="Refresh leaderboard"
           >
             <RotateCcw size={13} />
