@@ -353,3 +353,12 @@ html:not(.dark) .recognition-aura-gold:hover {
     0 16px 48px rgba(0, 0, 0, 0.12);
   transform: translateY(-7px);
 }
+
+/* ── Typing caret — sharp step-blink matching monkeytype feel ── */
+@keyframes typing-caret-blink {
+  0%, 49.9% { opacity: 1; }
+  50%, 100%  { opacity: 0; }
+}
+.typing-caret {
+  animation: typing-caret-blink 1.05s infinite;
+}

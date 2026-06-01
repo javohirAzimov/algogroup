@@ -5,13 +5,15 @@ import {
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Keyboard, Trophy, RotateCcw, Loader2,
-  CheckCircle2, AlertCircle,
+  CheckCircle2, AlertCircle, Trash2,
 } from 'lucide-react'
 import {
   submitTypingScore,
   getTypingLeaderboard,
   getMyTypingStats,
+  deleteTypingScores,
 } from '../services/api'
+import { useAuth } from '../context/AuthContext'
 import { formatShortDate } from '../utils/formatDate'
 
 // ── Constants ─────────────────────────────────────────────────────────
@@ -94,12 +96,16 @@ function wordErrors(typed, target) {
 }
 
 // ── Word display — memoized to prevent re-renders every timer tick ─────
+// Uses a single floating caret element that slides between char positions
+// via CSS transform (GPU-composited), matching the Monkeytype smoothness.
 const WordDisplay = memo(function WordDisplay({ words, wordIdx, inputVal, wordResults, phase, onFocus }) {
   const containerRef = useRef(null)
   const innerRef     = useRef(null)
   const activeRef    = useRef(null)
+  const caretRef     = useRef(null)
   const [translateY, setTranslateY] = useState(0)
 
+  // Scroll: keep the active word in the 1st visible row
   useLayoutEffect(() => {
     if (!activeRef.current || !containerRef.current) return
     const cRect = containerRef.current.getBoundingClientRect()
@@ -117,16 +123,59 @@ const WordDisplay = memo(function WordDisplay({ words, wordIdx, inputVal, wordRe
     if (phase === 'idle') setTranslateY(0)
   }, [phase])
 
+  // Slide the caret to the current char position via direct DOM measurement
+  useLayoutEffect(() => {
+    const caret = caretRef.current
+    const cont  = containerRef.current
+    if (!caret || !cont) return
+
+    const wordEl = cont.querySelector('[data-aw]')
+    if (!wordEl) return
+
+    const chars     = wordEl.querySelectorAll('[data-ci]')
+    const caretPos  = inputVal.length
+    const contRect  = cont.getBoundingClientRect()
+    let x, y, h
+
+    if (caretPos < chars.length) {
+      const r = chars[caretPos].getBoundingClientRect()
+      x = r.left  - contRect.left
+      y = r.top   - contRect.top + translateY
+      h = r.height
+    } else if (chars.length > 0) {
+      const r = chars[chars.length - 1].getBoundingClientRect()
+      x = r.right - contRect.left
+      y = r.top   - contRect.top + translateY
+      h = r.height
+    } else {
+      return
+    }
+
+    caret.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`
+    caret.style.height    = `${Math.round(h)}px`
+  }, [inputVal, wordIdx, translateY])
+
   return (
     <div
       ref={containerRef}
       className="overflow-hidden h-[220px] relative cursor-text select-none"
       onClick={onFocus}
     >
+      {/* Single floating caret — moves via CSS transform, blinks via step animation */}
+      <div
+        ref={caretRef}
+        className="typing-caret absolute top-0 left-0 w-[2.5px] bg-brand rounded-full pointer-events-none"
+        style={{ transition: 'transform 45ms linear', willChange: 'transform', height: '32px' }}
+      />
+
       <div
         ref={innerRef}
-        className="flex flex-wrap gap-x-4 gap-y-[24px] transition-transform duration-150 ease-out"
-        style={{ transform: `translateY(-${translateY}px)` }}
+        className="flex flex-wrap gap-x-4 gap-y-[24px]"
+        style={{
+          transform: `translateY(-${translateY}px)`,
+          transition: 'transform 110ms cubic-bezier(0.25, 0.1, 0.25, 1)',
+          willChange: 'transform',
+        }}
       >
         {words.map((word, wi) => {
           const isActive = wi === wordIdx
@@ -137,49 +186,33 @@ const WordDisplay = memo(function WordDisplay({ words, wordIdx, inputVal, wordRe
             <span
               key={wi}
               ref={isActive ? activeRef : null}
+              {...(isActive ? { 'data-aw': '' } : {})}
               className="relative inline-flex text-[26px] leading-none font-mono tracking-wide"
             >
               {word.split('').map((char, ci) => {
                 let cls
                 if (isActive) {
-                  if (ci < inputVal.length) {
-                    cls = inputVal[ci] === char ? 'text-ink' : 'text-danger'
-                  } else {
-                    cls = 'text-ink-subtle'
-                  }
+                  cls = ci < inputVal.length
+                    ? (inputVal[ci] === char ? 'text-ink' : 'text-danger')
+                    : 'text-ink-subtle'
                 } else if (isPast && result) {
-                  if (ci < result.typed.length) {
-                    cls = result.typed[ci] === char
-                      ? 'text-brand opacity-[0.55]'
-                      : 'text-danger opacity-[0.65]'
-                  } else {
-                    cls = 'text-danger opacity-[0.45]'
-                  }
+                  cls = ci < result.typed.length
+                    ? (result.typed[ci] === char ? 'text-brand opacity-[0.55]' : 'text-danger opacity-[0.65]')
+                    : 'text-danger opacity-[0.45]'
                 } else {
                   cls = 'text-ink-subtle/30'
                 }
-
-                const isCursor = isActive && ci === inputVal.length
-
                 return (
-                  <span key={ci} className={`relative ${cls}`}>
-                    {isCursor && (
-                      <span className="absolute left-0 top-[-2px] bottom-[-2px] w-[2px] bg-brand animate-pulse rounded-full" />
-                    )}
+                  <span key={ci} {...(isActive ? { 'data-ci': ci } : {})} className={cls}>
                     {char}
                   </span>
                 )
               })}
-
               {isActive && inputVal.length > word.length &&
                 inputVal.slice(word.length).split('').map((ch, ei) => (
-                  <span key={`x${ei}`} className="text-danger/80">{ch}</span>
+                  <span key={`x${ei}`} data-ci={word.length + ei} className="text-danger/80">{ch}</span>
                 ))
               }
-
-              {isActive && inputVal.length >= word.length && (
-                <span className="absolute -right-[3px] top-[-2px] bottom-[-2px] w-[2px] bg-brand animate-pulse rounded-full" />
-              )}
             </span>
           )
         })}
@@ -300,6 +333,9 @@ function PersonalStat({ icon, label, value }) {
 
 // ── Main component ────────────────────────────────────────────────────
 export default function AGType() {
+  const { user }                      = useAuth()
+  const isAdmin                       = user?.role === 'admin'
+
   const [phase,       setPhase]       = useState('idle')
   const [duration,    setDuration]    = useState(60)
   const [words,       setWords]       = useState(() => generateWords(200))
@@ -314,6 +350,7 @@ export default function AGType() {
   const [myStats,     setMyStats]     = useState(null)
   const [loadingLb,   setLoadingLb]   = useState(true)
   const [loadingMe,   setLoadingMe]   = useState(true)
+  const [clearingLb,  setClearingLb]  = useState(false)
 
   const inputRef    = useRef(null)
   const timerRef    = useRef(null)
@@ -452,6 +489,20 @@ export default function AGType() {
     if (e.key === 'Escape') { e.preventDefault(); restart() }
     if (e.key === 'Tab')    { e.preventDefault(); restart() }
   }, [restart])
+
+  async function handleClearLeaderboard() {
+    if (!window.confirm('Delete all typing scores? This cannot be undone.')) return
+    setClearingLb(true)
+    try {
+      await deleteTypingScores()
+      setLeaderboard([])
+      fetchMyStats()
+    } catch {
+      // silently fail — server logs the error
+    } finally {
+      setClearingLb(false)
+    }
+  }
 
   // Stable reference so WordDisplay memo doesn't break on every render
   const focusInput = useCallback(() => inputRef.current?.focus(), [])
@@ -654,13 +705,26 @@ export default function AGType() {
             <h3 className="text-sm font-semibold text-ink">Global Leaderboard</h3>
             <p className="text-ink-subtle text-[11px]">Best run per player — top 10</p>
           </div>
-          <button
-            onClick={fetchLeaderboard}
-            className="ml-auto text-ink-subtle hover:text-ink transition-colors p-1.5 rounded-lg hover:bg-white/5 cursor-pointer"
-            title="Refresh leaderboard"
-          >
-            <RotateCcw size={13} />
-          </button>
+          <div className="ml-auto flex items-center gap-1">
+            {isAdmin && (
+              <button
+                onClick={handleClearLeaderboard}
+                disabled={clearingLb || leaderboard.length === 0}
+                title="Clear all scores"
+                className="p-1.5 rounded-lg text-ink-subtle hover:text-danger hover:bg-danger/10
+                           disabled:opacity-30 transition-colors duration-150 cursor-pointer"
+              >
+                {clearingLb ? <Loader2 size={13} className="animate-spin" /> : <Trash2 size={13} />}
+              </button>
+            )}
+            <button
+              onClick={fetchLeaderboard}
+              className="text-ink-subtle hover:text-ink transition-colors p-1.5 rounded-lg hover:bg-white/5 cursor-pointer"
+              title="Refresh leaderboard"
+            >
+              <RotateCcw size={13} />
+            </button>
+          </div>
         </div>
         <div className="px-2">
           <LeaderboardTable rows={leaderboard} loading={loadingLb} />

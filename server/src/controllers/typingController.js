@@ -116,6 +116,13 @@ export async function getLeaderboard(_req, res, next) {
   } catch (err) { next(err) }
 }
 
+export async function clearScores(_req, res, next) {
+  try {
+    await prisma.typingScore.deleteMany()
+    res.status(204).end()
+  } catch (err) { next(err) }
+}
+
 export async function getMyStats(req, res, next) {
   try {
     const userId = req.user.id

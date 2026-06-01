@@ -57,6 +57,7 @@ export const deleteStartup  = (id) => api.delete(`/startups/${id}`)
 export const submitTypingScore      = (data) => api.post('/typing/scores', data)
 export const getTypingLeaderboard   = ()     => api.get('/typing/leaderboard')
 export const getMyTypingStats       = ()     => api.get('/typing/me')
+export const deleteTypingScores     = ()     => api.delete('/typing/scores')
 
 // Profile
 export const updateProfile          = (data) => api.patch('/profile/me', data)
