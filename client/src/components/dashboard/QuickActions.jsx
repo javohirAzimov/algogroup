@@ -57,7 +57,7 @@ export default function QuickActions() {
             key={to}
             onClick={() => navigate(to)}
             className="group/tile relative flex flex-col items-center gap-2 p-3.5 rounded-lg
-                       border border-white/5 bg-white/[0.025] overflow-hidden
+                       border border-edge bg-white dark:bg-white/[0.025] overflow-hidden
                        hover:-translate-y-0.5 active:scale-[0.97]
                        transition-all duration-200 cursor-pointer"
           >

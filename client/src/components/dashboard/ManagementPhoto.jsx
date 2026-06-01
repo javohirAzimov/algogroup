@@ -37,7 +37,7 @@ export default function ManagementPhoto({ imageUrl }) {
                         px-3 py-1 rounded-full bg-black/55 backdrop-blur-md
                         border border-brand/25">
           <span className="w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(0,200,83,0.8)]" />
-          <span className="text-ink text-[10px] font-semibold uppercase tracking-wider">ALGO Group Team</span>
+          <span className="text-white text-[10px] font-semibold uppercase tracking-wider">ALGO Group Team</span>
         </div>
       </div>
     </motion.div>

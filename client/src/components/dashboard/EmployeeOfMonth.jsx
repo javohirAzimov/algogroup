@@ -110,7 +110,7 @@ export default function EmployeeOfMonth({ name, role, quote, imageUrl }) {
           >
             "
           </span>
-          <p className="text-ink-muted text-sm leading-relaxed italic pt-1.5">
+          <p className="text-white/55 text-sm leading-relaxed italic pt-1.5">
             {quote}
           </p>
         </div>

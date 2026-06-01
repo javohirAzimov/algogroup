@@ -31,7 +31,7 @@ function NavItem({ to, label, Icon, onClose }) {
          transition-all duration-200
          ${isActive
            ? 'nav-active'
-           : 'text-ink-muted hover:text-ink hover:bg-white/5'
+           : 'text-ink-muted hover:text-ink hover:bg-black/5 dark:hover:bg-white/5'
          }`
       }
     >
@@ -72,7 +72,7 @@ function SidebarShell({ onClose }) {
           </div>
         </div>
         {onClose && (
-          <button onClick={onClose} className="text-ink-muted hover:text-ink transition-colors p-1 rounded-md hover:bg-white/5">
+          <button onClick={onClose} className="text-ink-muted hover:text-ink transition-colors p-1 rounded-md hover:bg-black/5 dark:hover:bg-white/5">
             <X size={16} />
           </button>
         )}
@@ -101,7 +101,7 @@ function SidebarShell({ onClose }) {
               className={({ isActive }) =>
                 `relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
                  transition-all duration-200
-                 ${isActive ? 'nav-active' : 'text-ink-muted hover:text-ink hover:bg-white/5'}`
+                 ${isActive ? 'nav-active' : 'text-ink-muted hover:text-ink hover:bg-black/5 dark:hover:bg-white/5'}`
               }
             >
               {({ isActive }) => (
@@ -121,7 +121,7 @@ function SidebarShell({ onClose }) {
 
       {/* User footer */}
       <div className="px-3 py-3 border-t border-edge flex-shrink-0">
-        <div className="flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
+        <div className="flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
           <div className="relative w-7 h-7 flex-shrink-0">
             <div className="absolute inset-0 rounded-full bg-brand/30 blur-sm" />
             <div className="relative w-7 h-7 rounded-full bg-brand/20 border border-brand/30

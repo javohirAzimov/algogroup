@@ -27,7 +27,7 @@ export default function TopBar({ onMenuClick }) {
                        flex items-center px-4 gap-3">
       <button
         onClick={onMenuClick}
-        className="lg:hidden p-2 rounded-lg text-ink-muted hover:text-ink hover:bg-white/5 transition-colors"
+        className="lg:hidden p-2 rounded-lg text-ink-muted hover:text-ink hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
         aria-label="Open menu"
       >
         <Menu size={18} />

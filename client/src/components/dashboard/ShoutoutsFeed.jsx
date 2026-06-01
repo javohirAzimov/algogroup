@@ -82,7 +82,7 @@ function PostShoutoutModal({ onClose, onPosted }) {
             <span className="text-xl">📣</span>
             <p className="text-ink font-semibold">Give a Shoutout</p>
           </div>
-          <button onClick={onClose} className="w-7 h-7 rounded-lg hover:bg-white/10 flex items-center justify-center">
+          <button onClick={onClose} className="w-7 h-7 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center">
             <X size={15} className="text-ink-muted" />
           </button>
         </div>
