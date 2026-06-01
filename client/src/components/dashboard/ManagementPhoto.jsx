@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion'
 
 export default function ManagementPhoto({ imageUrl }) {
-  const isReal = !!imageUrl
-  const src = imageUrl || '/Onboarding-bro.svg'
+  const src = imageUrl || '/mainhero.png'
 
   return (
     <motion.div
@@ -16,21 +15,14 @@ export default function ManagementPhoto({ imageUrl }) {
         <div className="absolute top-0 left-0 w-48 h-48 bg-brand/12 blur-3xl rounded-full pointer-events-none z-10" />
         <div className="absolute bottom-0 right-0 w-40 h-40 bg-brand/8 blur-2xl rounded-full pointer-events-none z-10" />
 
-        {!isReal && (
-          <div className="absolute inset-0 bg-gradient-to-br from-brand/8 via-transparent to-[#001a00]/30" />
-        )}
-
         <img
           src={src}
           alt="ALGO Group team"
-          className={`w-full h-full transition-transform duration-700 group-hover:scale-[1.03]
-                     ${isReal ? 'object-cover' : 'object-contain p-8'}`}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
         />
 
-        {/* Bottom fade for real photos */}
-        {isReal && (
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-        )}
+        {/* Bottom fade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent z-10" />
 
         {/* Label badge */}
         <div className="absolute bottom-3 left-4 z-20 flex items-center gap-2

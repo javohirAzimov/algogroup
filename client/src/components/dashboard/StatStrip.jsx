@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Users, CalendarDays, MessageSquare, BookOpen } from 'lucide-react'
+import { getUsers, getAnnouncements, getSuggestionStats, getKnowledgeCategories } from '../../services/api'
 
-const STATS = [
+const STAT_CONFIG = [
   {
     icon: Users,
     label: 'Team Members',
-    raw: 120,
+    key: 'teamMembers',
     suffix: '+',
     color: 'text-brand',
     iconBg: 'bg-brand/10',
@@ -18,7 +19,7 @@ const STATS = [
   {
     icon: CalendarDays,
     label: 'Active Events',
-    raw: 8,
+    key: 'activeEvents',
     suffix: '',
     color: 'text-amber-400',
     iconBg: 'bg-amber-400/10',
@@ -30,7 +31,7 @@ const STATS = [
   {
     icon: MessageSquare,
     label: 'Team Feedback',
-    raw: 24,
+    key: 'teamFeedback',
     suffix: '',
     color: 'text-indigo-400',
     iconBg: 'bg-indigo-400/10',
@@ -42,7 +43,7 @@ const STATS = [
   {
     icon: BookOpen,
     label: 'KB Resources',
-    raw: 64,
+    key: 'kbResources',
     suffix: '',
     color: 'text-rose-400',
     iconBg: 'bg-rose-400/10',
@@ -53,11 +54,44 @@ const STATS = [
   },
 ]
 
+function usePortalStats() {
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    Promise.allSettled([
+      getUsers(),
+      getAnnouncements(),
+      getSuggestionStats(),
+      getKnowledgeCategories(),
+    ]).then(([users, announcements, suggestions, knowledge]) => {
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      setData({
+        teamMembers:  users.status === 'fulfilled'
+          ? users.value.data.length
+          : 0,
+        activeEvents: announcements.status === 'fulfilled'
+          ? announcements.value.data.filter(a => new Date(a.date) >= today).length
+          : 0,
+        teamFeedback: suggestions.status === 'fulfilled'
+          ? suggestions.value.data.total
+          : 0,
+        kbResources:  knowledge.status === 'fulfilled'
+          ? knowledge.value.data.length
+          : 0,
+      })
+    })
+  }, [])
+
+  return data
+}
+
 function useCountUp(target, startDelay = 0) {
   const [value, setValue] = useState(0)
   const rafRef = useRef(null)
 
   useEffect(() => {
+    if (target === 0) { setValue(0); return }
     const timeout = setTimeout(() => {
       const start = performance.now()
       const duration = 1300
@@ -136,10 +170,17 @@ function StatCard({ icon: Icon, label, raw, suffix, color, iconBg, iconBorder, g
 }
 
 export default function StatStrip() {
+  const stats = usePortalStats()
+
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      {STATS.map((s, i) => (
-        <StatCard key={s.label} {...s} index={i} />
+      {STAT_CONFIG.map((cfg, i) => (
+        <StatCard
+          key={cfg.label}
+          {...cfg}
+          raw={stats?.[cfg.key] ?? 0}
+          index={i}
+        />
       ))}
     </div>
   )
