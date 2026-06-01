@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Users, Wifi } from 'lucide-react'
+import { Send, Users, Wifi, Trash2 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useSocket } from '../../context/SocketContext'
+import { clearChatMessages } from '../../services/api'
 
 function timeAgo(date) {
   const secs = Math.floor((Date.now() - new Date(date)) / 1000)
@@ -23,7 +24,6 @@ function shouldShowHeader(messages, index) {
   const prev = messages[index - 1]
   const curr = messages[index]
   if (prev.userId !== curr.userId) return true
-  // Show header again if more than 5 minutes apart
   return new Date(curr.createdAt) - new Date(prev.createdAt) > 5 * 60 * 1000
 }
 
@@ -87,28 +87,23 @@ function shouldShowDateDivider(messages, index) {
 }
 
 export default function GroupChat() {
-  const { user } = useAuth()
-  const { socket, onlineCount } = useSocket()
-  const [messages, setMessages] = useState([])
-  const [input, setInput] = useState('')
-  const [connected, setConnected] = useState(false)
-  const bottomRef = useRef(null)
-  const textareaRef = useRef(null)
+  const { user }                      = useAuth()
+  const { socket, onlineCount, messages } = useSocket()
+  const [input, setInput]             = useState('')
+  const [connected, setConnected]     = useState(false)
+  const [clearing, setClearing]       = useState(false)
+  const bottomRef                     = useRef(null)
+  const textareaRef                   = useRef(null)
+  const isAdmin                       = user?.role === 'admin'
 
   useEffect(() => {
     if (!socket) return
-
     setConnected(socket.connected)
     socket.on('connect',    () => setConnected(true))
     socket.on('disconnect', () => setConnected(false))
-    socket.on('history',    msgs => setMessages(msgs))
-    socket.on('new_message', msg => setMessages(prev => [...prev, msg]))
-
     return () => {
       socket.off('connect')
       socket.off('disconnect')
-      socket.off('history')
-      socket.off('new_message')
     }
   }, [socket])
 
@@ -131,6 +126,18 @@ export default function GroupChat() {
     }
   }
 
+  async function handleClear() {
+    if (!window.confirm('Clear all chat messages? This cannot be undone.')) return
+    setClearing(true)
+    try {
+      await clearChatMessages()
+    } catch {
+      // server emits history:[] via socket, UI updates automatically
+    } finally {
+      setClearing(false)
+    }
+  }
+
   return (
     <div className="flex flex-col h-full min-h-0">
       {/* Header */}
@@ -139,9 +146,22 @@ export default function GroupChat() {
           <Users size={15} className="text-brand" />
           <span className="text-sm font-semibold text-ink">Group Chat</span>
         </div>
-        <div className="flex items-center gap-1.5">
-          <Wifi size={12} className={connected ? 'text-brand' : 'text-ink-subtle'} />
-          <span className="text-[11px] text-ink-muted font-medium">{onlineCount} online</span>
+        <div className="flex items-center gap-2">
+          {isAdmin && (
+            <button
+              onClick={handleClear}
+              disabled={clearing || messages.length === 0}
+              title="Clear all messages"
+              className="p-1.5 rounded-lg text-ink-subtle hover:text-danger hover:bg-danger/10
+                         disabled:opacity-30 transition-colors duration-150"
+            >
+              <Trash2 size={13} />
+            </button>
+          )}
+          <div className="flex items-center gap-1.5">
+            <Wifi size={12} className={connected ? 'text-brand' : 'text-ink-subtle'} />
+            <span className="text-[11px] text-ink-muted font-medium">{onlineCount} online</span>
+          </div>
         </div>
       </div>
 

@@ -27,6 +27,7 @@ import birthdaysRouter     from './routes/birthdays.js'
 import shoutoutsRouter     from './routes/shoutouts.js'
 import gamificationRouter  from './routes/gamification.js'
 import tournamentsRouter   from './routes/tournaments.js'
+import chatRouter          from './routes/chat.js'
 import errorHandler        from './middleware/errorHandler.js'
 
 dotenv.config()
@@ -111,6 +112,7 @@ app.use('/api/birthdays',     birthdaysRouter)
 app.use('/api/shoutouts',     shoutoutsRouter)
 app.use('/api/gamification',  gamificationRouter)
 app.use('/api/tournaments',   tournamentsRouter)
+app.use('/api/chat',          chatRouter)
 
 app.use(errorHandler)
 
@@ -166,7 +168,7 @@ io.on('connection', async (socket) => {
   // Send last 100 chat messages to this client
   try {
     const messages = await prisma.chatMessage.findMany({
-      take: 100,
+      take: 200,
       orderBy: { createdAt: 'asc' },
       include: { user: { select: { id: true, name: true, department: true } } },
     })
@@ -184,6 +186,19 @@ io.on('connection', async (socket) => {
         include: { user: { select: { id: true, name: true, department: true } } },
       })
       io.emit('new_message', msg)
+
+      // Keep at most 200 messages — delete oldest if over limit
+      const total = await prisma.chatMessage.count()
+      if (total > 200) {
+        const oldest = await prisma.chatMessage.findMany({
+          orderBy: { createdAt: 'asc' },
+          take: total - 200,
+          select: { id: true },
+        })
+        await prisma.chatMessage.deleteMany({
+          where: { id: { in: oldest.map(m => m.id) } },
+        })
+      }
     } catch (err) {
       console.error('Chat send error:', err.message)
     }

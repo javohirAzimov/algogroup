@@ -2,7 +2,12 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 import { useAuth } from './AuthContext'
 
-const SocketContext = createContext({ socket: null, onlineCount: 0, onlineUsers: [] })
+const SocketContext = createContext({
+  socket: null,
+  onlineCount: 0,
+  onlineUsers: [],
+  messages: [],
+})
 
 // In production the React app is served by Express on the same origin.
 // In dev, Vite runs on :3000 and the backend on :5000.
@@ -12,13 +17,15 @@ const SOCKET_URL = import.meta.env.PROD
 
 export function SocketProvider({ children }) {
   const { user } = useAuth()
-  const [socket, setSocket] = useState(null)
+  const [socket, setSocket]           = useState(null)
   const [onlineCount, setOnlineCount] = useState(0)
   const [onlineUsers, setOnlineUsers] = useState([])
+  const [messages, setMessages]       = useState([])
 
   useEffect(() => {
     if (!user) {
       setSocket(null)
+      setMessages([])
       return
     }
     const token = localStorage.getItem('algo-token')
@@ -29,6 +36,8 @@ export function SocketProvider({ children }) {
 
     s.on('online_count', count => setOnlineCount(count))
     s.on('online_users', users => setOnlineUsers(users))
+    s.on('history',      msgs  => setMessages(msgs))
+    s.on('new_message',  msg   => setMessages(prev => [...prev, msg]))
 
     setSocket(s)
     return () => {
@@ -40,7 +49,7 @@ export function SocketProvider({ children }) {
   }, [user])
 
   return (
-    <SocketContext.Provider value={{ socket, onlineCount, onlineUsers }}>
+    <SocketContext.Provider value={{ socket, onlineCount, onlineUsers, messages }}>
       {children}
     </SocketContext.Provider>
   )

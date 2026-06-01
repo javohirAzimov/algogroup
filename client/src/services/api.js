@@ -79,6 +79,9 @@ export const joinTournament         = (id)   => api.post(`/tournaments/${id}/joi
 export const createTournament       = (data) => api.post('/tournaments', data)
 export const deleteTournament       = (id)   => api.delete(`/tournaments/${id}`)
 
+// Chat
+export const clearChatMessages      = () => api.delete('/chat/messages')
+
 // Upload
 export const uploadFile             = (file) => {
   const form = new FormData()
