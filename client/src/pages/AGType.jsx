@@ -123,7 +123,9 @@ const WordDisplay = memo(function WordDisplay({ words, wordIdx, inputVal, wordRe
     if (phase === 'idle') setTranslateY(0)
   }, [phase])
 
-  // Slide the caret to the current char position via direct DOM measurement
+  // Slide the caret to the current char position via direct DOM measurement.
+  // getBoundingClientRect() returns screen coords that already include any
+  // CSS transforms on ancestors, so we must NOT add translateY again.
   useLayoutEffect(() => {
     const caret = caretRef.current
     const cont  = containerRef.current
@@ -140,12 +142,12 @@ const WordDisplay = memo(function WordDisplay({ words, wordIdx, inputVal, wordRe
     if (caretPos < chars.length) {
       const r = chars[caretPos].getBoundingClientRect()
       x = r.left  - contRect.left
-      y = r.top   - contRect.top + translateY
+      y = r.top   - contRect.top
       h = r.height
     } else if (chars.length > 0) {
       const r = chars[chars.length - 1].getBoundingClientRect()
       x = r.right - contRect.left
-      y = r.top   - contRect.top + translateY
+      y = r.top   - contRect.top
       h = r.height
     } else {
       return
@@ -153,6 +155,12 @@ const WordDisplay = memo(function WordDisplay({ words, wordIdx, inputVal, wordRe
 
     caret.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`
     caret.style.height    = `${Math.round(h)}px`
+
+    // Reset blink animation so caret is always solid right after moving,
+    // only blinks again when the user pauses (Monkeytype behavior).
+    caret.style.animation = 'none'
+    void caret.offsetWidth   // force reflow so the reset takes effect
+    caret.style.animation = ''
   }, [inputVal, wordIdx, translateY])
 
   return (
