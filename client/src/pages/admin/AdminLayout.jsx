@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { Megaphone, Star, Users, ImageIcon, ArrowLeft, LogOut, Rocket, Trophy } from 'lucide-react'
+import { Megaphone, Star, Users, ImageIcon, ArrowLeft, LogOut, Rocket, Trophy, Gift } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
 const links = [
@@ -9,6 +9,7 @@ const links = [
   { to: '/admin/media',         icon: ImageIcon,   label: 'Media'         },
   { to: '/admin/startups',      icon: Rocket,      label: 'Start-Ups'     },
   { to: '/admin/tournaments',   icon: Trophy,      label: 'Tournaments'   },
+  { to: '/admin/rewards',       icon: Gift,        label: 'Rewards'       },
 ]
 
 export default function AdminLayout() {

@@ -89,5 +89,6 @@ function safeUser(u) {
     department: u.department, avatarUrl: u.avatarUrl, birthday: u.birthday,
     isActive: u.isActive, createdAt: u.createdAt,
     xp: u.xp ?? 0, loginStreak: u.loginStreak ?? 0,
+    points: u.points ?? 0,
   }
 }

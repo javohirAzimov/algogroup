@@ -43,7 +43,7 @@ export async function awardXP(userId, amount) {
 }
 
 // Award a badge by key. Returns the Badge if newly earned, null if already owned.
-// Also credits badge.xpReward to the user.
+// Also credits badge.xpReward to the user and half that as store points.
 export async function awardBadge(userId, badgeKey) {
   try {
     const badge = await prisma.badge.findUnique({ where: { key: badgeKey } })
@@ -53,9 +53,17 @@ export async function awardBadge(userId, badgeKey) {
     })
     if (exists) return null
     await prisma.userBadge.create({ data: { userId, badgeId: badge.id } })
+    const ops = []
     if (badge.xpReward > 0) {
-      await prisma.user.update({ where: { id: userId }, data: { xp: { increment: badge.xpReward } } })
+      const pts = Math.floor(badge.xpReward / 2)
+      ops.push(
+        prisma.user.update({ where: { id: userId }, data: { xp: { increment: badge.xpReward }, points: { increment: pts } } }),
+        prisma.pointTransaction.create({
+          data: { userId, amount: pts, reason: 'achievement', note: badge.name },
+        }),
+      )
     }
+    if (ops.length) await prisma.$transaction(ops)
     return badge
   } catch (e) {
     console.error('awardBadge error:', e.message)

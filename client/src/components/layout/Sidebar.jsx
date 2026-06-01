@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, LayoutDashboard, Megaphone, MessageSquare,
-  BookOpen, Bot, Settings, X, ShieldCheck, LogOut, Rocket, Keyboard, Trophy, Medal,
+  BookOpen, Bot, Settings, X, ShieldCheck, LogOut, Rocket, Keyboard, Trophy, Medal, Gift, Star,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { computeLevel, levelBg } from '../../utils/levels'
@@ -18,6 +18,7 @@ const navItems = [
   { to: '/agtype',        label: 'AG Type',        icon: Keyboard },
   { to: '/tournaments',   label: 'Tournaments',    icon: Trophy },
   { to: '/achievements',  label: 'Achievements',   icon: Medal },
+  { to: '/rewards',       label: 'Rewards Store',  icon: Gift  },
   { to: '/settings',      label: 'Settings',       icon: Settings },
 ]
 
@@ -133,7 +134,7 @@ function SidebarShell({ onClose }) {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-ink text-xs font-medium truncate">{user?.name || 'User'}</p>
-            <div className="flex items-center gap-1.5 mt-0.5">
+            <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
               {user?.xp != null && (() => {
                 const { level, name } = computeLevel(user.xp)
                 return (
@@ -142,7 +143,13 @@ function SidebarShell({ onClose }) {
                   </span>
                 )
               })()}
-              {!user?.xp && (
+              {user?.points > 0 && (
+                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-semibold border border-brand/20 bg-brand/10 text-brand">
+                  <Star size={9} className="fill-brand" />
+                  {user.points.toLocaleString()}
+                </span>
+              )}
+              {!user?.xp && !user?.points && (
                 <p className="text-ink-subtle text-[11px] truncate">{user?.department || user?.role}</p>
               )}
             </div>

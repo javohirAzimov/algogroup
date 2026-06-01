@@ -21,6 +21,7 @@ import Register        from './pages/Register'
 
 import Achievements     from './pages/Achievements'
 import Tournaments      from './pages/Tournaments'
+import RewardsStore     from './pages/RewardsStore'
 
 import AdminAnnouncements from './pages/admin/AdminAnnouncements'
 import AdminSpotlight     from './pages/admin/AdminSpotlight'
@@ -28,6 +29,7 @@ import AdminUsers         from './pages/admin/AdminUsers'
 import AdminMedia         from './pages/admin/AdminMedia'
 import AdminStartups      from './pages/admin/AdminStartups'
 import AdminTournaments   from './pages/admin/AdminTournaments'
+import AdminRewards       from './pages/admin/AdminRewards'
 
 export default function App() {
   return (
@@ -54,6 +56,7 @@ export default function App() {
                 <Route path="agtype"        element={<AGType />} />
                 <Route path="achievements"  element={<Achievements />} />
                 <Route path="tournaments"   element={<Tournaments />} />
+                <Route path="rewards"       element={<RewardsStore />} />
               </Route>
 
               {/* Admin panel */}
@@ -65,6 +68,7 @@ export default function App() {
                 <Route path="media"         element={<AdminMedia />} />
                 <Route path="startups"      element={<AdminStartups />} />
                 <Route path="tournaments"   element={<AdminTournaments />} />
+                <Route path="rewards"       element={<AdminRewards />} />
               </Route>
             </Routes>
           </BrowserRouter>

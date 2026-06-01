@@ -28,6 +28,7 @@ import shoutoutsRouter     from './routes/shoutouts.js'
 import gamificationRouter  from './routes/gamification.js'
 import tournamentsRouter   from './routes/tournaments.js'
 import chatRouter          from './routes/chat.js'
+import rewardsRouter       from './routes/rewards.js'
 import errorHandler        from './middleware/errorHandler.js'
 
 dotenv.config()
@@ -54,6 +55,31 @@ async function ensureBadges() {
   }
 }
 ensureBadges().catch(err => console.error('Badge seed error:', err.message))
+
+async function seedRewards() {
+  const count = await prisma.rewardItem.count()
+  if (count > 0) return
+  await prisma.rewardItem.createMany({
+    data: [
+      // Merch tier
+      { name: 'ALGO Group Hoodie',   description: 'Premium ALGO Group branded hoodie with embroidered logo', imageUrl: '/12f4bfb4-7b7e-4b5b-bdaa-fb82c00cb528.jfif', tier: 'merch', cost: 500,   stock: 20  },
+      { name: 'ALGO Group T-Shirt',  description: 'Classic ALGO Group tee with screen-printed logo',          imageUrl: '/1cd4b1a5-91fe-482e-8413-b18a22a836fc.jfif',  tier: 'merch', cost: 250,   stock: 30  },
+      { name: 'ALGO Group Cap',      description: 'Snapback cap with embroidered ALGO Group logo',            imageUrl: null, tier: 'merch', cost: 150,   stock: 25  },
+      { name: 'Coffee Mug',          description: 'Ceramic mug with ALGO Group logo — perfect for mornings', imageUrl: null, tier: 'merch', cost: 100,   stock: 40  },
+      { name: 'Notebook & Pen Set',  description: 'Premium notebook + pen set with ALGO Group branding',     imageUrl: null, tier: 'merch', cost: 75,    stock: 35  },
+      // Mid tier
+      { name: 'Wireless Earbuds',    description: 'High-fidelity wireless earbuds with active noise cancellation', imageUrl: '/eeaf7d35-81f3-4e8d-9e75-3db3c98243e9.jfif', tier: 'mid', cost: 1500,  stock: 5   },
+      { name: 'Mechanical Keyboard', description: 'Premium mechanical keyboard for the ultimate typing experience',  imageUrl: '/photo_2025-11-20_08-54-03.jpg',             tier: 'mid', cost: 2000,  stock: 3   },
+      { name: 'Premium Backpack',    description: 'Durable multi-compartment backpack with padded laptop sleeve',    imageUrl: '/c7db6583-9f55-4212-aa2c-6461354a0939.jfif', tier: 'mid', cost: 1200,  stock: 5   },
+      // High tier
+      { name: 'Laptop',              description: 'High-performance laptop — specs by availability at time of redemption', imageUrl: null, tier: 'high', cost: 10000, stock: 1   },
+      { name: 'iPhone 16 Pro',       description: 'Apple iPhone 16 Pro — color of your choice',               imageUrl: null, tier: 'high', cost: 8000,  stock: 1   },
+      { name: 'Cash Bonus ($100)',    description: '$100 cash bonus equivalent awarded via company payment',   imageUrl: null, tier: 'high', cost: 5000,  stock: -1  },
+    ],
+  })
+  console.log('Reward store seeded')
+}
+seedRewards().catch(err => console.error('Reward seed error:', err.message))
 
 async function ensureAdmin() {
   const exists = await prisma.user.findUnique({ where: { email: 'admin@algogroup.com' } })
@@ -113,6 +139,7 @@ app.use('/api/shoutouts',     shoutoutsRouter)
 app.use('/api/gamification',  gamificationRouter)
 app.use('/api/tournaments',   tournamentsRouter)
 app.use('/api/chat',          chatRouter)
+app.use('/api/rewards',       rewardsRouter)
 
 app.use(errorHandler)
 

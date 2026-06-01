@@ -83,6 +83,21 @@ export const deleteTournament       = (id)   => api.delete(`/tournaments/${id}`)
 // Chat
 export const clearChatMessages      = () => api.delete('/chat/messages')
 
+// Rewards Store
+export const getRewardsStore        = ()           => api.get('/rewards')
+export const getMyRedemptions       = ()           => api.get('/rewards/my-redemptions')
+export const redeemReward           = (id)         => api.post(`/rewards/${id}/redeem`)
+export const getPointsLeaderboard   = ()           => api.get('/rewards/leaderboard')
+// Admin rewards
+export const adminGetAllRewards     = ()           => api.get('/rewards/admin/items')
+export const adminCreateReward      = (data)       => api.post('/rewards/admin/items', data)
+export const adminUpdateReward      = (id, data)   => api.put(`/rewards/admin/items/${id}`, data)
+export const adminDeleteReward      = (id)         => api.delete(`/rewards/admin/items/${id}`)
+export const adminGetRedemptions    = (status)     => api.get('/rewards/admin/redemptions', { params: { status } })
+export const adminUpdateRedemption  = (id, data)   => api.patch(`/rewards/admin/redemptions/${id}`, data)
+export const adminGrantPoints       = (data)       => api.post('/rewards/admin/grant-points', data)
+export const adminAwardTournamentPts = (tId)       => api.post(`/rewards/admin/tournament-points/${tId}`)
+
 // Upload
 export const uploadFile             = (file) => {
   const form = new FormData()
