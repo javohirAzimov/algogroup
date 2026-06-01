@@ -1,14 +1,14 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import {
   Gift, Plus, Edit2, Trash2, CheckCircle2, XCircle, Truck,
-  Clock, Star, Loader2, Users, Trophy, ChevronDown,
+  Clock, Star, Loader2, Users, Trophy, ChevronDown, Upload,
 } from 'lucide-react'
 import {
   adminGetAllRewards, adminCreateReward, adminUpdateReward, adminDeleteReward,
   adminGetRedemptions, adminUpdateRedemption,
   adminGrantPoints, adminAwardTournamentPts,
-  getUsers, getTournaments,
+  getUsers, getTournaments, uploadFile,
 } from '../../services/api'
 
 const TIER_OPTIONS = [
@@ -44,7 +44,22 @@ const BLANK = { name: '', description: '', imageUrl: '', tier: 'merch', cost: ''
 
 function PrizeForm({ initial = BLANK, onSave, onCancel, saving }) {
   const [f, setF] = useState({ ...BLANK, ...initial, cost: String(initial.cost ?? ''), stock: String(initial.stock ?? '-1') })
+  const [uploadingImg, setUploadingImg] = useState(false)
+  const fileInputRef = useRef(null)
   const set = (k, v) => setF(p => ({ ...p, [k]: v }))
+
+  async function handleImageUpload(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploadingImg(true)
+    try {
+      const { data } = await uploadFile(file)
+      set('imageUrl', data.url)
+    } catch { /* ignore */ } finally {
+      setUploadingImg(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+  }
 
   function submit(e) {
     e.preventDefault()
@@ -85,11 +100,45 @@ function PrizeForm({ initial = BLANK, onSave, onCancel, saving }) {
             className="w-full glass border border-edge rounded-xl px-3 py-2 text-sm text-ink focus:outline-none focus:border-brand/50" />
         </div>
       </div>
+
+      {/* Image upload */}
       <div>
-        <label className="block text-xs font-medium text-ink-muted mb-1">Image URL (or /public path)</label>
-        <input value={f.imageUrl} onChange={e => set('imageUrl', e.target.value)} placeholder="/filename.jfif or https://…"
-          className="w-full glass border border-edge rounded-xl px-3 py-2 text-sm text-ink focus:outline-none focus:border-brand/50" />
+        <label className="block text-xs font-medium text-ink-muted mb-2">Prize Image</label>
+        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+        <div className="flex items-center gap-3">
+          <div className="w-20 h-20 rounded-xl border border-edge overflow-hidden flex-shrink-0 bg-surface">
+            {f.imageUrl
+              ? <img src={f.imageUrl} alt="preview" className="w-full h-full object-cover" />
+              : <div className="w-full h-full flex items-center justify-center"><Gift size={22} className="text-ink-subtle" /></div>
+            }
+          </div>
+          <div className="space-y-2">
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploadingImg}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand/10 border border-brand/20 text-brand text-xs font-medium hover:bg-brand/20 transition-colors disabled:opacity-50 cursor-pointer"
+            >
+              {uploadingImg ? <Loader2 size={12} className="animate-spin" /> : <Upload size={12} />}
+              {uploadingImg ? 'Uploading…' : 'Upload from PC'}
+            </button>
+            {f.imageUrl && (
+              <button
+                type="button"
+                onClick={() => set('imageUrl', '')}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-edge text-ink-muted text-xs hover:text-danger hover:border-danger/30 transition-colors cursor-pointer"
+              >
+                <XCircle size={12} />
+                Remove image
+              </button>
+            )}
+            {f.imageUrl && (
+              <p className="text-[11px] text-ink-subtle truncate max-w-[200px]">{f.imageUrl}</p>
+            )}
+          </div>
+        </div>
       </div>
+
       <div>
         <label className="block text-xs font-medium text-ink-muted mb-1">Description</label>
         <textarea value={f.description} onChange={e => set('description', e.target.value)} rows={2}
@@ -105,7 +154,7 @@ function PrizeForm({ initial = BLANK, onSave, onCancel, saving }) {
           className="flex-1 py-2 rounded-xl border border-edge text-sm text-ink-muted hover:text-ink hover:bg-white/5 transition-colors">
           Cancel
         </button>
-        <button type="submit" disabled={saving}
+        <button type="submit" disabled={saving || uploadingImg}
           className="flex-1 py-2 rounded-xl bg-brand text-white text-sm font-semibold hover:bg-brand/90 disabled:opacity-60 transition-colors flex items-center justify-center gap-1.5">
           {saving ? <Loader2 size={14} className="animate-spin" /> : <CheckCircle2 size={14} />}
           Save

@@ -62,24 +62,57 @@ async function seedRewards() {
   await prisma.rewardItem.createMany({
     data: [
       // Merch tier
-      { name: 'ALGO Group Hoodie',   description: 'Premium ALGO Group branded hoodie with embroidered logo', imageUrl: '/12f4bfb4-7b7e-4b5b-bdaa-fb82c00cb528.jfif', tier: 'merch', cost: 500,   stock: 20  },
-      { name: 'ALGO Group T-Shirt',  description: 'Classic ALGO Group tee with screen-printed logo',          imageUrl: '/1cd4b1a5-91fe-482e-8413-b18a22a836fc.jfif',  tier: 'merch', cost: 250,   stock: 30  },
-      { name: 'ALGO Group Cap',      description: 'Snapback cap with embroidered ALGO Group logo',            imageUrl: null, tier: 'merch', cost: 150,   stock: 25  },
-      { name: 'Coffee Mug',          description: 'Ceramic mug with ALGO Group logo — perfect for mornings', imageUrl: null, tier: 'merch', cost: 100,   stock: 40  },
-      { name: 'Notebook & Pen Set',  description: 'Premium notebook + pen set with ALGO Group branding',     imageUrl: null, tier: 'merch', cost: 75,    stock: 35  },
+      { name: 'ALGO Group Hoodie',       description: 'Premium ALGO Group branded hoodie with embroidered logo',        imageUrl: '/hoodie.jfif',       tier: 'merch', cost: 500,   stock: 20 },
+      { name: 'ALGO Group White Hoodie', description: 'Clean white hoodie with embroidered ALGO Group logo',            imageUrl: '/white-hoodie.jfif', tier: 'merch', cost: 500,   stock: 20 },
+      { name: 'ALGO Group T-Shirt',      description: 'Classic ALGO Group tee with screen-printed logo',                imageUrl: '/t-shirt.jfif',      tier: 'merch', cost: 250,   stock: 30 },
+      { name: 'ALGO Group Cap',          description: 'Snapback cap with embroidered ALGO Group logo',                  imageUrl: '/cap.jfif',          tier: 'merch', cost: 150,   stock: 25 },
+      { name: 'Coffee Mug',              description: 'Ceramic mug with ALGO Group logo — perfect for mornings',        imageUrl: null,                 tier: 'merch', cost: 100,   stock: 40 },
+      { name: 'Notebook & Pen Set',      description: 'Premium notebook + pen set with ALGO Group branding',            imageUrl: null,                 tier: 'merch', cost: 75,    stock: 35 },
       // Mid tier
-      { name: 'Wireless Earbuds',    description: 'High-fidelity wireless earbuds with active noise cancellation', imageUrl: '/eeaf7d35-81f3-4e8d-9e75-3db3c98243e9.jfif', tier: 'mid', cost: 1500,  stock: 5   },
-      { name: 'Mechanical Keyboard', description: 'Premium mechanical keyboard for the ultimate typing experience',  imageUrl: '/photo_2025-11-20_08-54-03.jpg',             tier: 'mid', cost: 2000,  stock: 3   },
-      { name: 'Premium Backpack',    description: 'Durable multi-compartment backpack with padded laptop sleeve',    imageUrl: '/c7db6583-9f55-4212-aa2c-6461354a0939.jfif', tier: 'mid', cost: 1200,  stock: 5   },
+      { name: 'Wireless Earbuds',        description: 'High-fidelity wireless earbuds with active noise cancellation',  imageUrl: null,                 tier: 'mid',   cost: 1500,  stock: 5  },
+      { name: 'Mechanical Keyboard',     description: 'Premium mechanical keyboard for the ultimate typing experience',  imageUrl: null,                 tier: 'mid',   cost: 2000,  stock: 3  },
+      { name: 'Premium Backpack',        description: 'Durable multi-compartment backpack with padded laptop sleeve',   imageUrl: null,                 tier: 'mid',   cost: 1200,  stock: 5  },
       // High tier
-      { name: 'Laptop',              description: 'High-performance laptop — specs by availability at time of redemption', imageUrl: null, tier: 'high', cost: 10000, stock: 1   },
-      { name: 'iPhone 16 Pro',       description: 'Apple iPhone 16 Pro — color of your choice',               imageUrl: null, tier: 'high', cost: 8000,  stock: 1   },
-      { name: 'Cash Bonus ($100)',    description: '$100 cash bonus equivalent awarded via company payment',   imageUrl: null, tier: 'high', cost: 5000,  stock: -1  },
+      { name: 'Laptop',                  description: 'High-performance laptop — specs by availability at time of redemption', imageUrl: null,          tier: 'high',  cost: 10000, stock: 1  },
+      { name: 'iPhone 16 Pro',           description: 'Apple iPhone 16 Pro — color of your choice',                    imageUrl: null,                 tier: 'high',  cost: 8000,  stock: 1  },
+      { name: 'Cash Bonus ($100)',       description: '$100 cash bonus equivalent awarded via company payment',         imageUrl: null,                 tier: 'high',  cost: 5000,  stock: -1 },
     ],
   })
   console.log('Reward store seeded')
 }
 seedRewards().catch(err => console.error('Reward seed error:', err.message))
+
+// Fix any wrong imageUrls from initial bad seed
+async function fixRewardImages() {
+  const fixes = [
+    { name: 'ALGO Group Hoodie',       imageUrl: '/hoodie.jfif'       },
+    { name: 'ALGO Group T-Shirt',      imageUrl: '/t-shirt.jfif'      },
+    { name: 'ALGO Group Cap',          imageUrl: '/cap.jfif'          },
+    { name: 'Wireless Earbuds',        imageUrl: null                  },
+    { name: 'Mechanical Keyboard',     imageUrl: null                  },
+    { name: 'Premium Backpack',        imageUrl: null                  },
+  ]
+  for (const { name, imageUrl } of fixes) {
+    await prisma.rewardItem.updateMany({ where: { name }, data: { imageUrl } })
+  }
+  // Add white hoodie if missing
+  const whiteExists = await prisma.rewardItem.findFirst({ where: { name: 'ALGO Group White Hoodie' } })
+  if (!whiteExists) {
+    await prisma.rewardItem.create({
+      data: {
+        name: 'ALGO Group White Hoodie',
+        description: 'Clean white hoodie with embroidered ALGO Group logo',
+        imageUrl: '/white-hoodie.jfif',
+        tier: 'merch',
+        cost: 500,
+        stock: 20,
+      }
+    })
+  } else {
+    await prisma.rewardItem.updateMany({ where: { name: 'ALGO Group White Hoodie' }, data: { imageUrl: '/white-hoodie.jfif' } })
+  }
+}
+fixRewardImages().catch(err => console.error('Reward image fix error:', err.message))
 
 async function ensureAdmin() {
   const exists = await prisma.user.findUnique({ where: { email: 'admin@algogroup.com' } })
@@ -98,7 +131,7 @@ const app        = express()
 const httpServer = createServer(app)
 const PORT       = process.env.PORT || 5000
 
-app.set('trust proxy', 1)
+app.set('trust proxy', true)
 
 const allowedOrigins = [
   process.env.CLIENT_ORIGIN || 'http://localhost:3000',
@@ -117,11 +150,16 @@ app.use(cors({
   credentials: true,
 }))
 app.use(express.json())
-app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 200 }))
+
+// Loose global limit — internal portal, real IPs resolved via full proxy chain
+app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 5000, standardHeaders: true, legacyHeaders: false }))
+
+// Tight limit for auth endpoints only (brute-force protection)
+const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 30, standardHeaders: true, legacyHeaders: false })
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 
-app.use('/api/auth',          authRouter)
+app.use('/api/auth',          authLimiter, authRouter)
 app.use('/api/users',         usersRouter)
 app.use('/api/announcements', announcementsRouter)
 app.use('/api/suggestions',   suggestionsRouter)
