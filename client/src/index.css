@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&family=Syne:wght@600;700;800&family=Fira+Code:wght@400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -60,7 +60,9 @@
   --glow-brand:   none;
   --glow-brand-sm: none;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans:    "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Syne", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-data:    "Fira Code", "Fira Mono", ui-monospace, monospace;
   --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-fast: 150ms;
@@ -144,6 +146,17 @@
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-right: 1px solid var(--border);
+    position: relative;
+  }
+  /* Sidebar noise micro-texture */
+  .glass-sidebar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 0;
   }
 
   /* Glowing active nav state */
@@ -169,6 +182,75 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--border), var(--accent), var(--border), transparent);
     opacity: 0.5;
+  }
+
+  /* Stat card — stronger frosted glass */
+  .stat-glass {
+    background: rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Recognition aura — emerald green */
+  .recognition-aura-green {
+    box-shadow:
+      0 0 0 1px rgba(0,200,83,0.22),
+      0 0 48px rgba(0,200,83,0.14),
+      0 0 90px rgba(0,200,83,0.07),
+      0 20px 72px rgba(0,0,0,0.65);
+    transition: box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform   300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .recognition-aura-green:hover {
+    box-shadow:
+      0 0 0 1px rgba(0,200,83,0.40),
+      0 0 72px rgba(0,200,83,0.26),
+      0 0 140px rgba(0,200,83,0.12),
+      0 28px 88px rgba(0,0,0,0.72);
+    transform: translateY(-7px);
+  }
+
+  /* Recognition aura — gold / rose */
+  .recognition-aura-gold {
+    box-shadow:
+      0 0 0 1px rgba(251,191,36,0.22),
+      0 0 48px rgba(251,191,36,0.12),
+      0 0 90px rgba(251,191,36,0.06),
+      0 20px 72px rgba(0,0,0,0.65);
+    transition: box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform   300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .recognition-aura-gold:hover {
+    box-shadow:
+      0 0 0 1px rgba(251,191,36,0.40),
+      0 0 72px rgba(251,191,36,0.22),
+      0 0 140px rgba(251,191,36,0.10),
+      0 28px 88px rgba(0,0,0,0.72);
+    transform: translateY(-7px);
+  }
+
+  /* Gold shimmer — animated gradient text */
+  .text-shimmer-gold {
+    background: linear-gradient(
+      110deg,
+      #f59e0b 0%, #fcd34d 28%, #fbbf24 48%, #f59e0b 68%, #fcd34d 100%
+    );
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-gold 3.2s linear infinite;
+  }
+
+  /* Live badge dot pulse */
+  .live-dot {
+    animation: live-pulse 2.6s ease-in-out infinite;
+  }
+
+  /* Floating particle */
+  .animate-particle {
+    animation: particle-float linear infinite;
   }
 }
 
@@ -198,4 +280,37 @@
   0%, 100% { transform: translate(0, 0) scale(1); }
   33%       { transform: translate(3%, 2%) scale(1.04); }
   66%       { transform: translate(-2%, 3%) scale(0.97); }
+}
+
+@keyframes shimmer-gold {
+  0%   { background-position: 0% center; }
+  100% { background-position: 220% center; }
+}
+
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(0,200,83,0.65); }
+  50%       { box-shadow: 0 0 14px rgba(0,200,83,1), 0 0 22px rgba(0,200,83,0.5); }
+}
+
+@keyframes particle-float {
+  0%   { transform: translateY(0)    rotate(0deg)   scale(0);   opacity: 0; }
+  10%  { transform: translateY(-8px) rotate(45deg)  scale(1);   opacity: 0.9; }
+  80%  { opacity: 0.5; }
+  100% { transform: translateY(-110px) rotate(320deg) scale(0.3); opacity: 0; }
+}
+
+@keyframes aura-breathe {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 0.85; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-particle,
+  .live-dot,
+  .text-shimmer-gold,
+  .recognition-aura-green,
+  .recognition-aura-gold {
+    animation: none !important;
+    transition: opacity 200ms ease, transform 200ms ease !important;
+  }
 }
