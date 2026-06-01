@@ -38,20 +38,21 @@ function formatDate(d) {
 function PrizeImage({ imageUrl, tier, name }) {
   const t = TIER[tier] || TIER.merch
   const [imgErr, setImgErr] = useState(false)
-  if (!imageUrl || imgErr) {
-    return (
-      <div className={`w-full h-40 flex items-center justify-center bg-gradient-to-br ${t.gradient} border-b border-edge`}>
-        <Gift size={40} className={`${t.color} opacity-60`} />
-      </div>
-    )
-  }
   return (
-    <img
-      src={imageUrl}
-      alt={name}
-      onError={() => setImgErr(true)}
-      className="w-full h-40 object-cover border-b border-edge"
-    />
+    <div className="w-full aspect-[4/3] overflow-hidden border-b border-edge flex-shrink-0">
+      {!imageUrl || imgErr ? (
+        <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${t.gradient}`}>
+          <Gift size={40} className={`${t.color} opacity-60`} />
+        </div>
+      ) : (
+        <img
+          src={imageUrl}
+          alt={name}
+          onError={() => setImgErr(true)}
+          className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+        />
+      )}
+    </div>
   )
 }
 
